@@ -50,7 +50,7 @@
             </div>
             <div id="progressPerUnit" class="widget-content" style="height:350px;overflow-y:auto">
                 <ul class="unstyled">
-                    @foreach($jp_es2 as $s)
+                    @foreach($jml_peg_es2 as $s)
                     <li>
                         {{$s->unit_eselon2}}
                         <span class='pull-right strong'>{{($s->tot_jp == null) ? 0 : $s->tot_jp}}%</span>
