@@ -195,6 +195,15 @@ class KompetensiController extends Controller
         $kompetensi = KompetensiPegawai::where('id_kompetensi', $request->id_kompetensi)
                 ->where('nip', $request->id_pegawai)
                 ->delete();
+        $trash = Kompetensi::select(DB::raw('kompetensi.id_kompetensi, nip'))
+                ->leftJoin('kompetensi_pegawai', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                ->get();
+        foreach ($trash as $t) {
+            if ($t->nip == null) {
+                Kompetensi::where('id_kompetensi', $t->id_kompetensi)
+                ->delete();
+            }
+        }
         Session::flash('sukses', 'Data berhasil dihapus.');
         return redirect()->back();
     }

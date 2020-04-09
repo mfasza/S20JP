@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Pegawai;
+use App\Kompetensi;
 use Illuminate\Support\Facades\Session;
 use App\Imports\AdminImport_p;
 use App\Imports\Eselon2Import_p;
@@ -175,6 +176,15 @@ class PegawaiController extends Controller
     public function delete(Request $request){
         $pegawai = Pegawai::findOrFail($request->pegawai_id);
         $pegawai->delete();
+        $trash = Kompetensi::select(DB::raw('kompetensi.id_kompetensi, nip'))
+                ->leftJoin('kompetensi_pegawai', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                ->get();
+        foreach ($trash as $t) {
+            if ($t->nip == null) {
+                Kompetensi::where('id_kompetensi', $t->id_kompetensi)
+                ->delete();
+            }
+        }
         Session::flash('sukses', 'Data berhasil dihapus.');
         return redirect()->back();
     }
