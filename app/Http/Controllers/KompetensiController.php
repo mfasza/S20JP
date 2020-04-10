@@ -136,7 +136,11 @@ class KompetensiController extends Controller
             'excelFile.mimes' => 'Format dokumen tidak sesuai.'
         ]);
         $import = new KompetensiImport();
-        $import->import($request->excelFile, 'local');
+        try {
+            $import->import($request->excelFile, 'local');
+        } catch (\ErrorException $e) {
+            return redirect()->back()->withErrors('(Kolom Tanggal Mulai / Tanggal Selesai): Format penulisan tanggal seharusnya 1998-02-16');
+        }
         Session::flash('sukses', 'Seluruh data berhasil ditambahkan.');
         return redirect()->back();
     }
