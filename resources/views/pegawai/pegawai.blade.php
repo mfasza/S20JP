@@ -21,6 +21,7 @@
         @error('Kode Unit Eselon 3')
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert">&times</button>
+                <strong>Mohon lakukan perbaikan pada data dan submit ulang:</strong><br>
                 <strong>{{$message}}</strong>
             </div>
         @enderror
@@ -123,11 +124,11 @@
         $('#tabel').DataTable({
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
-        // Get id of delete instance
-        $('.hapus').on('click', function(event){
-            var peg_id = $(this).data('id');
-            $('#peg_id').val(peg_id);
-        });
+    });
+    // Get id of delete instance
+    $('.hapus').on('click', function(event){
+        var peg_id = $(this).data('id');
+        $('#peg_id').val(peg_id);
     });
 </script>
 @endsection

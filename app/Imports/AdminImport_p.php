@@ -15,6 +15,7 @@ use Maatwebsite\Excel\Validators\Failure;
 class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
 {
     use Importable;
+    private $baris = 2;
     /**
     * @param array $row
     *
@@ -26,8 +27,9 @@ class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
         Validator::make($row,[
             'Kode Unit Eselon 3' => ['nullable', Rule::in($list_es3)]
         ],[
-            'Kode Unit Eselon 3.in' => 'Terdapat ketidaksesuaian antara Kode Unit Eselon 2 dan :attribute, Mohon periksa kembali.'
+            'Kode Unit Eselon 3.in' => "($this->baris.Kode Unit Eselon 3): Kode Unit Eselon 3 berada diluar Kode Unit Eselon 2 yang Anda masukkan."
         ])->validate();
+        $this->baris += 1;
         return new Pegawai([
             'nip' => $row['NIP'],
             'nama' => $row['Nama'],
