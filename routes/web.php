@@ -9,9 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return redirect('dashboard');
-});
+Route::redirect('/', url('dashboard'));
 Auth::routes(['register' => false]);
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/dashboard/progressEselon2', 'DashboardController@progressEselon2');
