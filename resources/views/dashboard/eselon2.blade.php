@@ -81,6 +81,64 @@
                 <canvas id="doughnut"></canvas>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="widget-box shadow-sm widget-primary">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Top 3 Pegawai</h5>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="unstyled">
+                            <li>Muhammad Faza</li>
+                            <li>Muhammad Hadid</li>
+                            <li>Muhammad Utbah</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="widget-box shadow-sm widget-primary">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Top 3 Unit Kerja</h5>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="unstyled">
+                            <li>BPS Kabupaten Gresik</li>
+                            <li>BPS Kabupaten Mojokerto</li>
+                            <li>BPS Kabupaten Lamongan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="widget-box shadow-sm widget-danger">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Bottom 3 Pegawai</h5>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="unstyled">
+                            <li>Muhammad Abdurrahman</li>
+                            <li>Haji Pekok</li>
+                            <li>Saifullah Utbah</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="widget-box shadow-sm widget-danger">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Bottom 3 Unit Kerja</h5>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="unstyled">
+                            <li>Kabpuaten Malang</li>
+                            <li>Kota Surabaya</li>
+                            <li>Kabupaten Sidoarjo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="{{asset('js/chart/Chart.js')}}"></script>
