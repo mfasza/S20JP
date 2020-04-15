@@ -22,86 +22,92 @@
                 </ul>
             </div>
         </div>
-        <div class="widget-box shadow-sm pull-left" style="width:49.5%;">
-            <div class="widget-title">
-                <span class='icon'><i class="icon-exclamation-sign"></i></span><h5>Progress per Satuan Kerja</h5>
-            </div>
-            <div class="widget-content" style="height:350px;overflow-y:auto">
-                <ul class="unstyled">
-                    <li>
-                        Kabupaten Gresik
-                        <span class='pull-right strong'>100%</span>
-                        <div class="progress progress-striped progress-success">
-                            <div style='width: 100%' class='bar'></div>
-                        </div>
-                    </li>
-                    <li>
-                        Kabupaten Mojokerto
-                        <span class='pull-right strong'>80%</span>
-                        <div class="progress progress-striped">
-                            <div style='width: 80%' class='bar'></div>
-                        </div>
-                    </li>
-                    <li>
-                        Kabupaten Lamongan
-                        <span class='pull-right strong'>60%</span>
-                        <div class="progress progress-striped">
-                            <div style='width: 60%' class='bar'></div>
-                        </div>
-                    </li>
-                    <li>
-                        Kabupaten Sidoarjo
-                        <span class='pull-right strong'>40%</span>
-                        <div class="progress progress-striped">
-                            <div style='width: 40%' class='bar'></div>
-                        </div>
-                    </li>
-                    <li>
-                        Kota Surabaya
-                        <span class='pull-right strong'>20%</span>
-                        <div class="progress progress-striped progress-warning">
-                            <div style='width: 20%' class='bar'></div>
-                        </div>
-                    </li>
-                    <li>
-                        Kabupaten Malang
-                        <span class='pull-right strong'>10%</span>
-                        <div class="progress progress-striped progress-danger">
-                            <div style='width: 10%' class='bar'></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="widget-box shadow-sm pull-right" style="width:49.5%;clear:none">
-            <div class="widget-title">
-                <span class='icon'><i class="icon-dashboard"></i></span><h5>Komposisi Pengembangan Kompetensi</h5>
-            </div>
-            <div class="widget-content" style="height:350px;overflow-y:auto">
-                <canvas id="doughnut"></canvas>
-            </div>
-        </div>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="widget-box shadow-sm widget-primary">
+            <div class="col-sm-6">
+                <div class="widget-box shadow-sm">
                     <div class="widget-title">
-                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Top 3 Pegawai</h5>
+                        <span class='icon'><i class="icon-exclamation-sign"></i></span><h5>Progress Unit Kerja Eselon 3</h5>
                     </div>
-                    <div class="widget-content">
+                    <div class="widget-content" style="height:350px;overflow-y:auto">
                         <ul class="unstyled">
-                            <li>Muhammad Faza</li>
-                            <li>Muhammad Hadid</li>
-                            <li>Muhammad Utbah</li>
+                            <li>
+                                Kabupaten Gresik
+                                <span class='pull-right strong'>100%</span>
+                                <div class="progress progress-striped progress-success">
+                                    <div style='width: 100%' class='bar'></div>
+                                </div>
+                            </li>
+                            <li>
+                                Kabupaten Mojokerto
+                                <span class='pull-right strong'>80%</span>
+                                <div class="progress progress-striped">
+                                    <div style='width: 80%' class='bar'></div>
+                                </div>
+                            </li>
+                            <li>
+                                Kabupaten Lamongan
+                                <span class='pull-right strong'>60%</span>
+                                <div class="progress progress-striped">
+                                    <div style='width: 60%' class='bar'></div>
+                                </div>
+                            </li>
+                            <li>
+                                Kabupaten Sidoarjo
+                                <span class='pull-right strong'>40%</span>
+                                <div class="progress progress-striped">
+                                    <div style='width: 40%' class='bar'></div>
+                                </div>
+                            </li>
+                            <li>
+                                Kota Surabaya
+                                <span class='pull-right strong'>20%</span>
+                                <div class="progress progress-striped progress-warning">
+                                    <div style='width: 20%' class='bar'></div>
+                                </div>
+                            </li>
+                            <li>
+                                Kabupaten Malang
+                                <span class='pull-right strong'>10%</span>
+                                <div class="progress progress-striped progress-danger">
+                                    <div style='width: 10%' class='bar'></div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
+                <div class="widget-box shadow-sm">
+                    <div class="widget-title">
+                        <span class='icon'><i class="icon-dashboard"></i></span><h5>Komposisi Pengembangan Kompetensi</h5>
+                    </div>
+                    <div class="widget-content" style="height:350px;overflow-y:auto">
+                        <canvas id="doughnut"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="widget-box shadow-sm widget-primary">
                     <div class="widget-title">
-                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Top 3 Unit Kerja</h5>
+                        <span class="icon"><i class="icon-star"></i></span><h5>Top 3 Pegawai</h5>
                     </div>
-                    <div class="widget-content">
+                    <div class="widget-content text-center">
+                        <ul class="unstyled">
+                            <li>Muhammad Faza - BPS Kabupaten Ogan Komering Ilir</li>
+                            <li>Muhammad Hadid - BPS Provinsi Kalimantan Selatan</li>
+                            <li>Muhammad Utbah - BPS Provinsi Kalimantan Selatan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="widget-box shadow-sm widget-primary">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-building"></i></span><h5>Top 3 Unit Kerja Eselon 3</h5>
+                    </div>
+                    <div class="widget-content text-center">
                         <ul class="unstyled">
                             <li>BPS Kabupaten Gresik</li>
                             <li>BPS Kabupaten Mojokerto</li>
@@ -110,33 +116,86 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="widget-box shadow-sm widget-danger">
                     <div class="widget-title">
-                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Bottom 3 Pegawai</h5>
+                        <span class="icon"><i class="icon-star"></i></span><h5>Bottom 3 Pegawai</h5>
                     </div>
-                    <div class="widget-content">
+                    <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Muhammad Abdurrahman</li>
-                            <li>Haji Pekok</li>
-                            <li>Saifullah Utbah</li>
+                            <li>Muhammad Abdurrahman Wachid - BPS Provinsi Kalimantan Selatan</li>
+                            <li>Haji Pekok - BPS Provinsi Kalimantan Selatan</li>
+                            <li>Saifullah Utbah - BPS Provinsi Kalimantan Selatan</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <div class="widget-box shadow-sm widget-danger">
                     <div class="widget-title">
-                        <span class="icon"><i class="icon-dashboard"></i></span><h5>Bottom 3 Unit Kerja</h5>
+                        <span class="icon"><i class="icon-building"></i></span><h5>Bottom 3 Unit Kerja Eselon 3</h5>
                     </div>
-                    <div class="widget-content">
+                    <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Kabpuaten Malang</li>
-                            <li>Kota Surabaya</li>
-                            <li>Kabupaten Sidoarjo</li>
+                            <li>BPS Kabpuaten Malang</li>
+                            <li>BPS Kabupaten Sidoarjo</li>
+                            <li>BPS Kota Surabaya</li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="widget-box shadow-sm">
+            <div class="widget-title">
+                <span class='icon'><i class="icon-exchange"></i></span><h5>Neighboorhood</h5>
+            </div>
+            <div class="widget-content"  style="height:350px;overflow-y:auto">
+                <ul class="unstyled">
+                    <li>
+                        BPS Propinsi Jawa Barat
+                        <span class='pull-right strong'>100%</span>
+                        <div class="progress progress-striped progress-success">
+                            <div style='width: 100%' class='bar'></div>
+                        </div>
+                    </li>
+                    <li>
+                        BPS Propinsi Jawa Tengah
+                        <span class='pull-right strong'>80%</span>
+                        <div class="progress progress-striped">
+                            <div style='width: 80%' class='bar'></div>
+                        </div>
+                    </li>
+                    <li>
+                        BPS Propinsi DKI Jakarta
+                        <span class='pull-right strong'>60%</span>
+                        <div class="progress progress-striped">
+                            <div style='width: 60%' class='bar'></div>
+                        </div>
+                    </li>
+                    <li>
+                        BPS Propinsi Banten
+                        <span class='pull-right strong'>40%</span>
+                        <div class="progress progress-striped">
+                            <div style='width: 40%' class='bar'></div>
+                        </div>
+                    </li>
+                    <li>
+                        BPS Propinsi Yogyakarta
+                        <span class='pull-right strong'>20%</span>
+                        <div class="progress progress-striped progress-warning">
+                            <div style='width: 20%' class='bar'></div>
+                        </div>
+                    </li>
+                    <li>
+                        BPS Propinsi Bali
+                        <span class='pull-right strong'>10%</span>
+                        <div class="progress progress-striped progress-danger">
+                            <div style='width: 10%' class='bar'></div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
