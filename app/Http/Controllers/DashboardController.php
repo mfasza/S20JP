@@ -29,26 +29,33 @@ class DashboardController extends Controller
             case 'admin':
                 // PILIHAN
                 $eselon2 = DB::table('eselon2')->select('unit_eselon2')->get()->toArray(); //mengambil seluruh unit eselon 2
+
+
                 // PROGRESS
                 // mengambil capaian jp seluruh pegawai BPS RI
                 $tmp = DB::table('kompetensi_pegawai')
                         ->select(DB::raw('nip, SUM(jp) as jp'))
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->groupBy('nip');
+
                 // menghitung jumlah pegawai dengan capaian jp lebih besar dari 20
                 $jp = DB::table(DB::raw("({$tmp->toSql()}) as tabel_jp"))
                         ->mergeBindings($tmp)
                         ->where('jp', '>=', '20')
                         ->count();
+
                 // menghitung jumlah seluruh pegawai BPS pada database
                 $jml_peg = DB::table('pegawai')
                         ->select(DB::raw('count(nip) as jml_peg'))
                         ->first();
+
                 // menghitung persentasi capaian 20 jp Indonesia
                 $obj = new \stdClass();
                 $obj->tot_jp = round($jp / $jml_peg->jml_peg * 100, 2);
                 $obj->unit_kerja = 'Indonesia';
                 $satkers = [json_decode(json_encode($obj))];
+
+
                 // PROGRESS PER SATUAN KERJA
                 // mengambil capaian jp per unit eselon 2 per pegawai
                 $jp_es2 = DB::table('eselon2')
@@ -57,12 +64,14 @@ class DashboardController extends Controller
                         ->leftJoin('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
                         ->leftJoin('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->groupBy('unit_eselon2', 'pegawai.nip');
+
                 // menghitung jumlah pegawai dengan capaian jp lebih besar dari 20 per unit eselon 2
                 $jml_peg_20jp = DB::table(DB::raw("({$jp_es2->toSql()}) as jp_es2"))
                         ->mergeBindings($jp_es2)
                         ->select(DB::raw("unit_eselon2, COUNT(nip) as tot_jp"))
                         ->where("tot_jp", ">=", "20")
                         ->groupBy("unit_eselon2");
+
                 // menghitung jumlah seluruh pegawai BPS pada database per unit eselon 2 dan left join dengan tabel jml_peg_20jp
                 $jml_peg_es2 = DB::table('eselon2')
                         ->select(DB::raw('eselon2.unit_eselon2, count(nip) as jml_peg, tot_jp'))
@@ -70,30 +79,99 @@ class DashboardController extends Controller
                         ->leftJoinSub($jml_peg_20jp, 'jml_peg_20jp', function($join){
                             $join->on('eselon2.unit_eselon2','=','jml_peg_20jp.unit_eselon2');
                         })
-                        ->groupBy('eselon2.unit_eselon2')
+                        ->groupBy('eselon2.unit_eselon2');
+
+                // mengurutkan berdasarkan kode eselon 2
+                $progress_es2 = $jml_peg_es2
+                        ->orderBy('eselon2.kode_eselon2', 'asc')
                         ->get();
+
                 // menghitung persentasi capaian 20 jp per unit eselon 2
-                foreach ($jml_peg_es2 as $key => $value) {
+                foreach ($progress_es2 as $key => $value) {
                     $value->tot_jp = ($value->jml_peg == 0) ? $value->tot_jp : round($value->tot_jp / $value->jml_peg * 100, 2);
                 }
+
+
                 // KOMPOSISI PEGEMBANGAN KOMPETENSI
-                $jenis_jp = DB::table('kompetensi_pegawai') // menghitung jumlah pelatihan per jenis pengembangan kompetensi
+                // menghitung jumlah pelatihan per jenis pengembangan kompetensi
+                $komposisi_plt = DB::table('kompetensi_pegawai')
                         ->select(DB::raw('jenis_pengembangan, count(jenis_pengembangan) as jml'))
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('jenis_pengembangan', 'kompetensi.kode_pengembangan', 'jenis_pengembangan.kode_pengembangan')
                         ->groupBy('jenis_pengembangan')
                         ->get();
                 $tot_jenis_jp = 0;
+
                 // menghitung total kegiatan pengembangan kompetensi
-                foreach ($jenis_jp as $j) {
+                foreach ($komposisi_plt as $j) {
                     $tot_jenis_jp += $j->jml;
                 }
-                foreach ($jenis_jp as $j) {
+                foreach ($komposisi_plt as $j) {
                     $j->jml = round($j->jml/$tot_jenis_jp*100,2);
                 }
-                return view('dashboard.admin', compact(['eselon2', 'satkers', 'jml_peg_es2', 'jenis_jp']));
+
+
+                // TOP 3 PEGAWAI
+                // mengambil daftar capaian jp pegawai seluruh Indonesia
+                $top3_peg = DB::table('pegawai')
+                        ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
+                        ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                        ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
+                        ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
+                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->groupBy('pegawai.nip')
+                        ->orderBy('jp', 'desc')
+                        ->take(3)
+                        ->get();
+
+
+                //TOP 3 UNIT KERJA ESELON 2
+                // menghitung persentasi capaian 20 jp per unit eselon 2 dan diurutkan bedasarkan persentasi terbesar
+                $top3_es2 = DB::table(DB::raw("({$jml_peg_es2->toSql()}) as jml_peg_es2"))
+                        ->mergeBindings($jml_peg_es2)
+                        ->select(DB::raw('unit_eselon2, tot_jp * 100 / jml_peg as prs_jp'))
+                        ->orderBy('prs_jp', 'desc')
+                        ->take(3)
+                        ->get();
+
+
+                // TOP 3 UNIT KERJA ESELON 3
+                // mengambil capaian jp per unit eselon 3 per pegawai
+                $jp_es3 = DB::table('eselon3')
+                        ->select(DB::raw('unit_eselon3, pegawai.nip, sum(jp) as tot_jp'))
+                        ->leftJoin('pegawai', 'eselon3.kode_eselon3', 'pegawai.kode_eselon3')
+                        ->leftJoin('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
+                        ->leftJoin('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                        ->groupBy('pegawai.nip');
+
+                // menghitung jumlah pegawai dengan capaian jp lebih besar dari 20 per unit eselon 3
+                $jml_peg_20jp = DB::table(DB::raw("({$jp_es3->toSql()}) as jp_es3"))
+                        ->mergeBindings($jp_es3)
+                        ->select(DB::raw("unit_eselon3, COUNT(nip) as tot_jp"))
+                        ->where("tot_jp", ">=", "20")
+                        ->groupBy("unit_eselon3");
+
+                // menghitung jumlah seluruh pegawai BPS pada database per unit eselon 3 dan left join dengan tabel jml_peg_20jp
+                $jml_peg_es3 = DB::table('eselon3')
+                        ->select(DB::raw('eselon3.unit_eselon3, count(nip) as jml_peg, tot_jp'))
+                        ->leftJoin('pegawai', 'eselon3.kode_eselon3', 'pegawai.kode_eselon3')
+                        ->leftJoinSub($jml_peg_20jp, 'jml_peg_20jp', function($join){
+                            $join->on('eselon3.unit_eselon3','=','jml_peg_20jp.unit_eselon3');
+                        })
+                        ->groupBy('eselon3.unit_eselon3');
+
+                // menghitung persentasi capaian 20 jp per unit eselon 3 dan diurutkan bedasarkan persentasi terbesar
+                $top3_es3 = DB::table(DB::raw("({$jml_peg_es3->toSql()}) as jml_peg_es3"))
+                        ->mergeBindings($jml_peg_es3)
+                        ->select(DB::raw('unit_eselon3, tot_jp * 100 / jml_peg as prs_jp'))
+                        ->orderBy('prs_jp', 'desc')
+                        ->take(3)
+                        ->get();
+
+
+                return view('dashboard.admin', compact(['eselon2', 'satkers', 'progress_es2', 'komposisi_plt', 'top3_peg', 'top3_es2', 'top3_es3']));
                 break;
-            
+
             case 'eselon2':
                 return view('dashboard.eselon2');
                 break;
@@ -103,7 +181,7 @@ class DashboardController extends Controller
                 break;
         }
     }
-    
+
     /**
      * Ajax request progress eselon 2 terpilih
      */
@@ -154,7 +232,7 @@ class DashboardController extends Controller
         $html .= "</ul>";
         return $html;
     }
-    
+
     public function progressPerUnit(Request $request)
     {
         // mengambil capaian jp per unit eselon 3 dari unit eselon 2 terpilih

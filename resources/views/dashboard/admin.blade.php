@@ -52,7 +52,7 @@
                     </div>
                     <div id="progressPerUnit" class="widget-content" style="height:350px;overflow-y:auto">
                         <ul class="unstyled">
-                            @foreach($jml_peg_es2 as $s)
+                            @foreach($progress_es2 as $s)
                             <li>
                                 {{$s->unit_eselon2}}
                                 <span class='pull-right strong'>{{($s->tot_jp == null) ? 0 : $s->tot_jp}}%</span>
@@ -84,9 +84,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Muhammad Faza - BPS Kabupaten Ogan Komering Ilir</li>
-                            <li>Muhammad Hadid - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Muhammad Utbah - BPS Provinsi Kalimantan Selatan</li>
+                            @foreach($top3_peg as $l)
+                            <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -114,9 +114,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>BPS Propinsi Kalimantan Selatan</li>
-                            <li>BPS Propinsi Nusa Tenggara Timur</li>
-                            <li>BPS Propinsi Sulawesi Selatan</li>
+                            @foreach($top3_es2 as $t)
+                            <li>{{$t->unit_eselon2}} ({{round($t->prs_jp,2)}}%)</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -128,9 +128,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>BPS Kabupaten Gresik</li>
-                            <li>BPS Kabupaten Mojokerto</li>
-                            <li>BPS Kabupaten Lamongan</li>
+                            @foreach($top3_es3 as $t)
+                            <li>{{$t->unit_eselon3}} ({{round($t->prs_jp,2)}}%)</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
         type: 'doughnut',
         data: {
             datasets: [{
-                data: [@foreach($jenis_jp as $j)'{{$j->jml}}',@endforeach],
+                data: [@foreach($komposisi_plt as $j)'{{$j->jml}}',@endforeach],
                 backgroundColor: [
                     window.chartColors.red,
                     window.chartColors.orange,
@@ -196,7 +196,7 @@
                 ],
                 label: 'Dataset 1'
             }],
-            labels: [@foreach($jenis_jp as $j)'{{$j->jenis_pengembangan}}',@endforeach]
+            labels: [@foreach($komposisi_plt as $j)'{{$j->jenis_pengembangan}}',@endforeach]
         },
         options: {
             responsive: true,
