@@ -98,9 +98,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Muhammad Abdurrahman Wachid - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Haji Pekok - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Saifullah Utbah - BPS Provinsi Kalimantan Selatan</li>
+                            @foreach($bottom3_peg as $l)
+                            <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -142,9 +142,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>BPS Propinsi DKI Jakarta</li>
-                            <li>BPS Propinsi Kepulauan Riau</li>
-                            <li>BPS Propinsi Malukus Selatan</li>
+                            @foreach($bottom3_es2 as $t)
+                            <li>{{$t->unit_eselon2}} ({{round($t->prs_jp,2)}}%)</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -156,9 +156,9 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>BPS Kabpuaten Malang</li>
-                            <li>BPS Kabupaten Sidoarjo</li>
-                            <li>BPS Kota Surabaya</li>
+                            @foreach($bottom3_es3 as $t)
+                            <li>{{$t->unit_eselon3}} ({{round($t->prs_jp,2)}}%)</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

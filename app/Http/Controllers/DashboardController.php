@@ -112,7 +112,7 @@ class DashboardController extends Controller
 
 
                 // TOP 3 PEGAWAI
-                // mengambil daftar capaian jp pegawai seluruh Indonesia
+                // mengambil daftar capaian jp pegawai seluruh Indonesia, diurutkan dari terbesar
                 $top3_peg = DB::table('pegawai')
                         ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
@@ -125,12 +125,36 @@ class DashboardController extends Controller
                         ->get();
 
 
+                // BOTTOM 3 PEGAWAI
+                // mengambil daftar capaian jp pegawai seluruh Indonesia, diurutkan dari terkecil
+                $bottom3_peg = DB::table('pegawai')
+                        ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
+                        ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                        ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
+                        ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
+                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->groupBy('pegawai.nip')
+                        ->orderBy('jp', 'asc')
+                        ->take(3)
+                        ->get();
+
+
                 //TOP 3 UNIT KERJA ESELON 2
                 // menghitung persentasi capaian 20 jp per unit eselon 2 dan diurutkan bedasarkan persentasi terbesar
                 $top3_es2 = DB::table(DB::raw("({$jml_peg_es2->toSql()}) as jml_peg_es2"))
                         ->mergeBindings($jml_peg_es2)
                         ->select(DB::raw('unit_eselon2, tot_jp * 100 / jml_peg as prs_jp'))
                         ->orderBy('prs_jp', 'desc')
+                        ->take(3)
+                        ->get();
+
+
+                // BOTTOM 3 UNIT KERJA ESELON 2
+                // menghitung persentasi capaian 20 jp per unit eselon 2 dan diurutkan bedasarkan persentasi terkecil
+                $bottom3_es2 = DB::table(DB::raw("({$jml_peg_es2->toSql()}) as jml_peg_es2"))
+                        ->mergeBindings($jml_peg_es2)
+                        ->select(DB::raw('unit_eselon2, tot_jp * 100 / jml_peg as prs_jp'))
+                        ->orderBy('prs_jp', 'asc')
                         ->take(3)
                         ->get();
 
@@ -169,7 +193,17 @@ class DashboardController extends Controller
                         ->get();
 
 
-                return view('dashboard.admin', compact(['eselon2', 'satkers', 'progress_es2', 'komposisi_plt', 'top3_peg', 'top3_es2', 'top3_es3']));
+                // BOTTOM 3 UNIT KERJA ESELON 3
+                // menghitung persentasi capaian 20 jp per unit eselon 3 dan diurutkan bedasarkan persentasi terkecil
+                $bottom3_es3 = DB::table(DB::raw("({$jml_peg_es3->toSql()}) as jml_peg_es3"))
+                        ->mergeBindings($jml_peg_es3)
+                        ->select(DB::raw('unit_eselon3, tot_jp * 100 / jml_peg as prs_jp'))
+                        ->orderBy('prs_jp', 'asc')
+                        ->take(3)
+                        ->get();
+
+
+                return view('dashboard.admin', compact(['eselon2', 'satkers', 'progress_es2', 'komposisi_plt', 'top3_peg', 'top3_es2', 'top3_es3', 'bottom3_peg', 'bottom3_es2', 'bottom3_es3']));
                 break;
 
             case 'eselon2':
