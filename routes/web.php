@@ -16,7 +16,9 @@ Route::get('/dashboard/progressEselon2', 'DashboardController@progressEselon2');
 Route::get('/dashboard/progressPerUnit', 'DashboardController@progressPerUnit');
 Route::get('/dashboard/komposisiJP', 'DashboardController@komposisiJP');
 Route::get('/dashboard/top3_peg', 'DashboardController@top3_peg');
+Route::get('/dashboard/bottom3_peg', 'DashboardController@bottom3_peg');
 Route::get('/dashboard/top3_es3', 'DashboardController@top3_es3');
+Route::get('/dashboard/bottom3_es3', 'DashboardController@bottom3_es3');
 
 Route::get('/pegawai', 'PegawaiController@index')->name('pegawai.view');
 Route::get('/pegawai/form', 'PegawaiController@form');

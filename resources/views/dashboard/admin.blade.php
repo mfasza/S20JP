@@ -96,7 +96,7 @@
                     <div class="widget-title">
                         <span class="icon"><i class="icon-star"></i></span><h5>Bottom 3 Pegawai</h5>
                     </div>
-                    <div class="widget-content text-center">
+                    <div id="bottom3_peg" class="widget-content text-center">
                         <ul class="unstyled">
                             @foreach($bottom3_peg as $l)
                             <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
@@ -154,7 +154,7 @@
                     <div class="widget-title">
                         <span class="icon"><i class="icon-building"></i></span><h5>Bottom 3 Unit Kerja Eselon 3</h5>
                     </div>
-                    <div class="widget-content text-center">
+                    <div id="bottom3_es3" class="widget-content text-center">
                         <ul class="unstyled">
                             @foreach($bottom3_es3 as $t)
                             <li>{{$t->unit_eselon3}} ({{round($t->prs_jp,2)}}%)</li>
@@ -270,6 +270,14 @@
                     $('#top3_peg').html(result);
                 }
             });
+            $.ajax({
+                url: "{{url('/dashboard/bottom3_peg')}}",
+                type: "get",
+                data: {value: value, _token: _token},
+                success: function(result){
+                    $('#bottom3_peg').html(result);
+                }
+            });
             if (document.getElementById("top3_es2")) {
                 document.getElementById("top3_es2").remove();
                 document.getElementById("top3_es3_col").className = "col-sm-6";
@@ -284,6 +292,14 @@
                 data: {value: value, _token: _token},
                 success: function(result){
                     $('#top3_es3').html(result);
+                }
+            });
+            $.ajax({
+                url: "{{url('/dashboard/bottom3_es3')}}",
+                type: "get",
+                data: {value: value, _token: _token},
+                success: function(result){
+                    $('#bottom3_es3').html(result);
                 }
             });
         } else {

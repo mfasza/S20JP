@@ -423,4 +423,83 @@ class DashboardController extends Controller
         $html .= "</ul>";
         return $html;
     }
+
+
+    // AJAX REQUEST UNTUK BOTTOM 3 PEGAWAI DARI UNIT KERJA ESELON 2 TERPILIH
+    public function bottom3_peg(Request $request)
+    {
+        // mengambil daftar capaian jp pegawai unit kerja eselon 2 terpilih, diurutkan dari terbesar
+        $bottom3_peg = DB::table('pegawai')
+                ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
+                ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
+                ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
+                ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                ->where('unit_eselon2', $request->value)
+                ->groupBy('pegawai.nip')
+                ->orderBy('jp', 'asc')
+                ->take(3)
+                ->get();
+        $html = '<ul class="unstyled">';
+        if (sizeof($bottom3_peg) == 0) {
+            $html .= "<li>Data Tidak Tersedia</li>";
+        } else {
+            foreach ($bottom3_peg as $key => $s) {
+                if($s->unit_eselon3 == null) {
+                    $unit_kerja = $s->unit_eselon2;
+                } else {
+                    $unit_kerja = $s->unit_eselon3;
+                };
+                $html .= "<li>$s->nama - $unit_kerja</li>";
+            }
+        }
+        $html .= "</ul>";
+        return $html;
+    }
+
+
+    // AJAX REQUEST UNTUK BOTTOM 3 UNIT KERJA ESELON 3 DARI UNIT KERJA ESELON 2 TERPILIH
+    public function bottom3_es3(Request $request)
+    {
+        // mengambil capaian jp per unit eselon 3 per pegawai
+        $jp_es3 = DB::table('eselon3')
+                ->select(DB::raw('unit_eselon3, pegawai.nip, sum(jp) as tot_jp'))
+                ->leftJoin('pegawai', 'eselon3.kode_eselon3', 'pegawai.kode_eselon3')
+                ->leftJoin('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
+                ->leftJoin('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                ->groupBy('pegawai.nip');
+
+        // menghitung jumlah pegawai dengan capaian jp lebih besar dari 20 per unit eselon 3
+        $jml_peg_20jp = DB::table(DB::raw("({$jp_es3->toSql()}) as jp_es3"))
+                ->mergeBindings($jp_es3)
+                ->select(DB::raw("unit_eselon3, COUNT(nip) as tot_jp"))
+                ->where("tot_jp", ">=", "2")
+                ->groupBy("unit_eselon3");
+
+        // menghitung jumlah seluruh pegawai BPS pada database per unit eselon 3 dan left join dengan tabel jml_peg_20jp
+        $jml_peg_es3 = DB::table('eselon3')
+                ->select(DB::raw('eselon3.unit_eselon3, count(nip) as jml_peg, tot_jp'))
+                ->where('unit_eselon2', $request->value)
+                ->leftJoin('eselon2', 'eselon2.kode_eselon2', 'eselon3.kode_eselon2')
+                ->leftJoin('pegawai', 'eselon3.kode_eselon3', 'pegawai.kode_eselon3')
+                ->leftJoinSub($jml_peg_20jp, 'jml_peg_20jp', function($join){
+                    $join->on('eselon3.unit_eselon3','=','jml_peg_20jp.unit_eselon3');
+                })
+                ->groupBy('eselon3.unit_eselon3');
+
+        // menghitung persentasi capaian 20 jp per unit eselon 3 dan diurutkan bedasarkan persentasi terendah
+        $bottom3_es3 = DB::table(DB::raw("({$jml_peg_es3->toSql()}) as jml_peg_es3"))
+                ->mergeBindings($jml_peg_es3)
+                ->select(DB::raw('unit_eselon3, tot_jp * 100 / jml_peg as prs_jp'))
+                ->orderBy('prs_jp', 'asc')
+                ->take(3)
+                ->get();
+
+        $html = '<ul class="unstyled">';
+        foreach ($bottom3_es3 as $s) {
+            $html .= "<li>$s->unit_eselon3 (".round($s->prs_jp,2)."%)</li>";
+        }
+        $html .= "</ul>";
+        return $html;
+    }
 }
