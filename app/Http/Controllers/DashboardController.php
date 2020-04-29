@@ -526,7 +526,7 @@ class DashboardController extends Controller
                 $jml_peg_20jp = DB::table(DB::raw("({$jp_es3->toSql()}) as jp_es3"))
                             ->mergeBindings($jp_es3)
                             ->select(DB::raw('unit_eselon3, count(nip) as tot_jp'))
-                            ->where('tot_jp', '>=', '2')
+                            ->where('tot_jp', '>=', '20')
                             ->groupBy('unit_eselon3');
                 // menghitung jumlah pegawai per unit kerja eselon 3 dan left join dengan tabel jml_peg_20jp
                 $neighbor = DB::table('eselon3')
