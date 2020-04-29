@@ -205,7 +205,7 @@
             },
             title: {
                 display: true,
-                text: '{{$satkers[0]->unit_kerja}}'
+                text: "@if(sizeof($komposisi_plt)== 0) Data Tidak Tersedia @else {{$satkers[0]->unit_kerja}} @endif"
             },
             animation: {
                 animateScale: true,

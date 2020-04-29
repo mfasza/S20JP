@@ -14,7 +14,7 @@
                 <ul class="unstyled">
                     <li>
                         {{$satkers[0]->unit_kerja}}
-                        <span class='pull-right strong'>{{$satkers[0]->tot_jp}}</span>
+                        <span class='pull-right strong'>{{$satkers[0]->tot_jp}}%</span>
                         <div class="progress progress-striped progress-warning">
                             <div style="width: {{$satkers[0]->tot_jp}}%" class='bar'></div>
                         </div>

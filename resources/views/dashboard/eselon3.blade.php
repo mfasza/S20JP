@@ -15,10 +15,10 @@
                     <div class="widget-content">
                         <ul class="unstyled">
                             <li>
-                                BPS Kabupaten Gresik
-                                <span class='pull-right strong'>20%</span>
+                                {{$satkers[0]->unit_kerja}}
+                                <span class='pull-right strong'>{{$satkers[0]->tot_jp}}%</span>
                                 <div class="progress progress-striped progress-warning">
-                                    <div style='width: 20%' class='bar'></div>
+                                    <div style="width: {{$satkers[0]->tot_jp}}%" class='bar'></div>
                                 </div>
                             </li>
                         </ul>
@@ -34,9 +34,13 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Muhammad Faza - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Muhammad Hadid - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Muhammad Utbah - BPS Provinsi Kalimantan Selatan</li>
+                            @if (sizeof($top3_peg)==0)
+                                <li>Data Tidak Tersedia</li>
+                            @else
+                                @foreach($top3_peg as $l)
+                                <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -48,9 +52,13 @@
                     </div>
                     <div class="widget-content text-center">
                         <ul class="unstyled">
-                            <li>Muhammad Abdurrahman - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Haji Pekok - BPS Provinsi Kalimantan Selatan</li>
-                            <li>Saifullah Utbah - BPS Provinsi Kalimantan Selatan</li>
+                            @if (sizeof($bottom3_peg)==0)
+                            <li>Data Tidak Tersedia</li>
+                        @else
+                            @foreach($bottom3_peg as $l)
+                            <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                            @endforeach
+                        @endif
                         </ul>
                     </div>
                 </div>
@@ -74,48 +82,15 @@
                     </div>
                     <div class="widget-content"  style="height:350px;overflow-y:auto">
                         <ul class="unstyled">
-                            <li>
-                                Kabupaten Malang
-                                <span class='pull-right strong'>100%</span>
-                                <div class="progress progress-striped progress-success">
-                                    <div style='width: 100%' class='bar'></div>
-                                </div>
-                            </li>
-                            <li>
-                                Kabupaten Mojokerto
-                                <span class='pull-right strong'>80%</span>
-                                <div class="progress progress-striped">
-                                    <div style='width: 80%' class='bar'></div>
-                                </div>
-                            </li>
-                            <li>
-                                Kabupaten Lamongan
-                                <span class='pull-right strong'>60%</span>
-                                <div class="progress progress-striped">
-                                    <div style='width: 60%' class='bar'></div>
-                                </div>
-                            </li>
-                            <li>
-                                Kabupaten Sidoarjo
-                                <span class='pull-right strong'>40%</span>
-                                <div class="progress progress-striped">
-                                    <div style='width: 40%' class='bar'></div>
-                                </div>
-                            </li>
-                            <li>
-                                Kota Surabaya
-                                <span class='pull-right strong'>20%</span>
-                                <div class="progress progress-striped progress-warning">
-                                    <div style='width: 20%' class='bar'></div>
-                                </div>
-                            </li>
-                            <li>
-                                Kabupaten Malang
-                                <span class='pull-right strong'>10%</span>
-                                <div class="progress progress-striped progress-danger">
-                                    <div style='width: 10%' class='bar'></div>
-                                </div>
-                            </li>
+                            @foreach($neighbor as $s)
+                                <li>
+                                    {{$s->unit_eselon3}}
+                                    <span class='pull-right strong'>{{$s->tot_jp}}%</span>
+                                    <div class="progress progress-striped @if($s->tot_jp <= 10) progress-danger @elseif($s->tot_jp <= 30) progress-warning @elseif($s->tot_jp >=90) progress-success @else progress-striped @endif">
+                                        <div style='width: {{$s->tot_jp}}%' class='bar'></div>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -141,7 +116,7 @@
         type: 'doughnut',
         data: {
             datasets: [{
-                data: [30, 20, 50],
+                data: [@foreach($jenis_jp as $j)'{{$j->jml}}',@endforeach],
                 backgroundColor: [
                     window.chartColors.red,
                     window.chartColors.orange,
@@ -153,7 +128,7 @@
                 ],
                 label: 'Dataset 1'
             }],
-            labels: ['Tugas Belajar', 'Bimbingan Teknis', 'Seminar']
+            labels: [@foreach($jenis_jp as $j)'{{$j->jenis_pengembangan}}',@endforeach]
         },
         options: {
             responsive: true,
@@ -162,7 +137,7 @@
             },
             title: {
                 display: true,
-                text: 'BPS Propinsi Jawa Timur'
+                text: "@if(sizeof($jenis_jp)== 0) Data Tidak Tersedia @else {{$satkers[0]->unit_kerja}} @endif"
             }
         }
     };
