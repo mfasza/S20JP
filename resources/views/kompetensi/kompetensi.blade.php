@@ -13,14 +13,14 @@
         <!-- Input Success -->
         @if($sukses = session('sukses'))
             <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
+                <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $sukses }}</strong>
             </div>
         @endif
         <!-- Error for excel validation -->
         @if(!empty($errors->all()))
             <div class="alert alert-danger alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
+                <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Mohon lakukan perbaikan pada data dan submit ulang:</strong><br>
                 <strong>{{ $errors->first() }}</strong><br>
             </div>
@@ -68,7 +68,7 @@
                     <label for="excelFile">Pilih file excel:</label>
                     <div class="form-group">
                         <input type="file" class="form-control-file @error('excelFile') is-invalid @enderror" name='excelFile' required accept=".xlsx,.xls,.csv">
-                        
+
                         @error('excelFile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
@@ -93,11 +93,6 @@
         // Data table show instance
         $('#tabel').DataTable({
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-        });
-        // Get id of delete instance
-        $('.hapus').on('click', function(event){
-            var peg_id = $(this).data('id');
-            $('#peg_id').val(peg_id);
         });
     });
 </script>

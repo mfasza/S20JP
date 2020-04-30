@@ -12,11 +12,11 @@
         <!-- Input Success -->
         @if($sukses = session('sukses'))
             <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
+                <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $sukses }}</strong>
             </div>
         @endif
-        <table class="table table-striped table-bordered" id="tabel" style="width:100%"> 
+        <table class="table table-striped table-bordered" id="tabel" style="width:100%">
             <thead>
                 <tr>
                     <th>Tanggal Mulai</th>
@@ -42,7 +42,7 @@
                             <button class="btn btn-sm btn-danger hapus" data-id="{{$nip}}" data-komp="{{$d->id_kompetensi}}" data-backdrop="static" data-toggle="modal" data-target="#modal-hapus">Hapus</button>
                         </td>
                     </tr>
-                @endforeach            
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -78,13 +78,13 @@
         $('#tabel').DataTable({
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
-        // Get id of delete instance
-        $('.hapus').on('click', function(event){
-            var peg_id = $(this).data('id');
-            var komp_id = $(this).data('komp');
-            $('#peg_id').val(peg_id);
-            $('#komp_id').val(komp_id);
-        });
+    });
+    // Get id of delete instance
+    $('.hapus').on('click', function(event){
+        var peg_id = $(this).data('id');
+        var komp_id = $(this).data('komp');
+        $('#peg_id').val(peg_id);
+        $('#komp_id').val(komp_id);
     });
 </script>
 @endsection

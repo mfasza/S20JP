@@ -46,7 +46,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="navbarBantuan" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Bantuan</a><span class="caret"></span>
                         <div class="dropdown-menu dropdown-menu-left" aria-labelledBy="navbarBantuan">
-                            <a href="#" class="dropdown-item">Panduan</a>
+                        <a href="{{url('/bantuan/panduan')}}" class="dropdown-item">Panduan</a>
                             <a href="{{url('/bantuan/kodeUnitKerja')}}" class="dropdown-item">Daftar Kode Unit Kerja</a>
                         </div>
                     </li>
