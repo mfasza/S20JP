@@ -23,7 +23,7 @@
 </head>
 <body class="bg-dark">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">            
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('img/bps.png')}}" height='25px' width='30px' alt="Logo" />&nbsp{{ config('app.name', 'Laravel') }}
             </a>
@@ -42,6 +42,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kompetensi.view') }}">{{ __('Kompetensi') }}</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarBantuan" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Bantuan</a><span class="caret"></span>
+                        <div class="dropdown-menu dropdown-menu-left" aria-labelledBy="navbarBantuan">
+                            <a href="#" class="dropdown-item">Panduan</a>
+                            <a href="{{url('/bantuan/kodeUnitKerja')}}" class="dropdown-item">Daftar Kode Unit Kerja</a>
+                        </div>
                     </li>
                 </ul>
 

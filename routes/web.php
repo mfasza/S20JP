@@ -39,3 +39,6 @@ Route::get('/kompetensi/detil/{nip}', 'KompetensiController@detilKompetensi');
 Route::post('/kompetensi/delete', 'KompetensiController@delete')->name('kompetensi.delete');
 Route::get('/kompetensi/edit/{nip}/{id_komp}', 'KompetensiController@edit')->name('kompetensi.edit');
 Route::post('/kompetensi/update/{nip}/{id_komp}', 'KompetensiController@update')->name('kompetensi.update');
+
+Route::get('/bantuan/panduan', "BantuanController@panduan");
+Route::get('/bantuan/kodeUnitKerja', "BantuanController@kodeUnitKerja");
