@@ -30,8 +30,8 @@
                 <table class="table table-bordered table-striped" id="kode_eselon3">
                     <thead>
                         <tr>
-                            <th>Kode Eselon 3</th>
                             <th>Unit Eselon 3</th>
+                            <th>Kode Eselon 3</th>
                         </tr>
                     </thead>
                     <tbody>
