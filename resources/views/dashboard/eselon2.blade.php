@@ -34,7 +34,7 @@
                                 <li>Data Tidak Tersedia</li>
                             @else
                                 @foreach($top3_peg as $l)
-                                <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                                <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
                                 @endforeach
                             @endif
                     </div>
@@ -67,7 +67,7 @@
                                 <li>Data Tidak Tersedia</li>
                             @else
                                 @foreach($bottom3_peg as $l)
-                                <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                                <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
                                 @endforeach
                             @endif
                         </ul>

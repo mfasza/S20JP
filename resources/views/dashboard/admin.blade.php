@@ -85,7 +85,7 @@
                     <div id="top3_peg" class="widget-content text-center">
                         <ul class="unstyled">
                             @foreach($top3_peg as $l)
-                            <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                        <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -99,7 +99,7 @@
                     <div id="bottom3_peg" class="widget-content text-center">
                         <ul class="unstyled">
                             @foreach($bottom3_peg as $l)
-                            <li>{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</li>
+                            <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
                             @endforeach
                         </ul>
                     </div>

@@ -118,7 +118,7 @@ class DashboardController extends Controller
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'desc')
                         ->take(3)
@@ -132,7 +132,7 @@ class DashboardController extends Controller
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'asc')
                         ->take(3)
@@ -296,7 +296,7 @@ class DashboardController extends Controller
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                         ->where('eselon2.kode_eselon2', Auth::user()->kode_satker)
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'desc')
@@ -310,7 +310,7 @@ class DashboardController extends Controller
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                         ->where('eselon2.kode_eselon2', Auth::user()->kode_satker)
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'asc')
@@ -463,7 +463,7 @@ class DashboardController extends Controller
                         ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon3, SUM(jp) as jp'))
                         ->where('eselon3.kode_eselon3', Auth::user()->kode_satker)
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'desc')
@@ -477,7 +477,7 @@ class DashboardController extends Controller
                         ->join('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
                         ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                         ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                        ->select(DB::raw('nama, unit_eselon3, SUM(jp) as jp'))
+                        ->select(DB::raw('pegawai.nip, nama, unit_eselon3, SUM(jp) as jp'))
                         ->where('eselon3.kode_eselon3', Auth::user()->kode_satker)
                         ->groupBy('pegawai.nip')
                         ->orderBy('jp', 'asc')
@@ -689,7 +689,7 @@ class DashboardController extends Controller
                 ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                 ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                 ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                 ->where('unit_eselon2', $request->value)
                 ->groupBy('pegawai.nip')
                 ->orderBy('jp', 'desc')
@@ -705,7 +705,7 @@ class DashboardController extends Controller
                 } else {
                     $unit_kerja = $s->unit_eselon3;
                 };
-                $html .= "<li>$s->nama - $unit_kerja</li>";
+                $html .= "<li><a href='".url('/kompetensi/detil', $s->nip)."'>$s->nama - $unit_kerja</a></li>";
             }
         }
         $html .= "</ul>";
@@ -768,7 +768,7 @@ class DashboardController extends Controller
                 ->join('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                 ->join('eselon2', 'pegawai.kode_eselon2', 'eselon2.kode_eselon2')
                 ->join('eselon3', 'pegawai.kode_eselon3', 'eselon3.kode_eselon3')
-                ->select(DB::raw('nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
+                ->select(DB::raw('pegawai.nip, nama, unit_eselon2, unit_eselon3, SUM(jp) as jp'))
                 ->where('unit_eselon2', $request->value)
                 ->groupBy('pegawai.nip')
                 ->orderBy('jp', 'asc')
@@ -784,7 +784,7 @@ class DashboardController extends Controller
                 } else {
                     $unit_kerja = $s->unit_eselon3;
                 };
-                $html .= "<li>$s->nama - $unit_kerja</li>";
+                $html .= "<li><a href='".url('/kompetensi/detil', $s->nip)."'>$s->nama - $unit_kerja</a></li>";
             }
         }
         $html .= "</ul>";
