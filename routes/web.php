@@ -42,3 +42,5 @@ Route::post('/kompetensi/update/{nip}/{id_komp}', 'KompetensiController@update')
 
 Route::get('/bantuan/panduan', "BantuanController@panduan");
 Route::get('/bantuan/kodeUnitKerja', "BantuanController@kodeUnitKerja");
+
+Route::post('/report/selection', "DownloadController@selection");

@@ -114,24 +114,26 @@
                 </div>
                 <div class="modal-body">
                     <form action="" method="post">
+                        @csrf
                         <div class="form-group">
                             <h6>Jenis Data: </h6>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio1" value="raw">
+                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio1" value="raw" required>
                                 <label class="form-check-label" for="inlineRadio1">Raw</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio2" value="agregat">
+                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio2" value="agregat" required>
                                 <label class="form-check-label" for="inlineRadio2">Agregat</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="filter"><h6>Filter: </h6></label>
-                            <select class="form-control" id="filter">
-                                <option>-- Pilih --</option>
-                                <option value="all">Semua</option>
-                                <option value="eselon2">Eselon 2</option>
+                            <select class="form-control" id="filter" required>
+                                <option value="">-- Pilih --</option>
+                                @if (Auth::user()->role != 'eselon3')
+                                    <option value="eselon2">Eselon 2</option>
+                                @endif
                                 <option value="eselon3">Eselon 3</option>
                             </select>
                         </div>
@@ -147,5 +149,6 @@
         </div>
     </div>
     {{-- akhir modal generate report --}}
+<script src="{{asset('js/download.js')}}"></script>
 </body>
 </html>
