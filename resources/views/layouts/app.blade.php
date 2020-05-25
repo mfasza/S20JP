@@ -43,6 +43,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kompetensi.view') }}">{{ __('Kompetensi') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-target="#modal-report" data-backdrop="static" data-toggle="modal">{{ __('Generate Report') }}</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="navbarBantuan" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Bantuan</a><span class="caret"></span>
                         <div class="dropdown-menu dropdown-menu-left" aria-labelledBy="navbarBantuan">
@@ -100,5 +103,49 @@
         @yield('content')
 
     </div>
+
+    {{-- modal generate report --}}
+    <div class="modal fade" id="modal-report" role="dialog" aria-labeledBy="myModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5><span class="icon"><i class='icon-download-alt'></i></span>&nbsp;Generate Report</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <h6>Jenis Data: </h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio1" value="raw">
+                                <label class="form-check-label" for="inlineRadio1">Raw</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio2" value="agregat">
+                                <label class="form-check-label" for="inlineRadio2">Agregat</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filter"><h6>Filter: </h6></label>
+                            <select class="form-control" id="filter">
+                                <option>-- Pilih --</option>
+                                <option value="all">Semua</option>
+                                <option value="eselon2">Eselon 2</option>
+                                <option value="eselon3">Eselon 3</option>
+                            </select>
+                        </div>
+
+                        <div id="unit-kerja-selector" class="form-group"></div>
+                </div>
+                <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Generate</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- akhir modal generate report --}}
 </body>
 </html>

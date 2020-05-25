@@ -131,7 +131,7 @@
                         Berikut merupakan tata cara penghitungan konversi Jam Pelajaran (JP) dari setiap jenis kegiatan pengembangan kompetensi
                         berdasarkan Lampiran Surat Sestama Nomor B-031/BPS/2600/02/2019.
                     </p>
-                    <table id="tabel" class="table table-bordered" style="max-width:100%;">
+                    <table id="tabel" class="table table-bordered" style="width:100%;">
                         <thead>
                             <tr class="text-center">
                                 <th rowspan="2">Kode</th>
@@ -146,11 +146,14 @@
                         <tr>
                             <td>A1</td>
                             <td>Tugas Belajar</td>
-                            <td rowspan="2" colspan="2" class="text-center">1 Semester = 20JP</td>
+                            <td>1 Semester = 20JP</td>
+                            <td>1 Semester = 20JP</td>
                         </tr>
                         <tr>
                             <td>A2</td>
                             <td>Izin Belajar</td>
+                            <td>1 Semester = 20JP</td>
+                            <td>1 Semester = 20JP</td>
                         </tr>
                         <tr>
                             <td>B1</td>
@@ -333,7 +336,9 @@
     $(document).ready(function() {
         // Data table show instance
         $('#tabel').DataTable({
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            "lengthChange": false,
+            "lengthMenu": [10]
         });
     });
+</script>
 @endsection
