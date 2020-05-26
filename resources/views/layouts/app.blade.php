@@ -113,23 +113,23 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="{{route('download')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <h6>Jenis Data: </h6>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio1" value="raw" required>
+                                <input class="form-check-input" type="radio" name="jenis_data" id="inlineRadio1" value="raw" required>
                                 <label class="form-check-label" for="inlineRadio1">Raw</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis-data" id="inlineRadio2" value="agregat" required>
+                                <input class="form-check-input" type="radio" name="jenis_data" id="inlineRadio2" value="agregat" required>
                                 <label class="form-check-label" for="inlineRadio2">Agregat</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="filter"><h6>Filter: </h6></label>
-                            <select class="form-control" id="filter" required>
+                            <select class="form-control" id="filter" name="filter" required>
                                 <option value="">-- Pilih --</option>
                                 @if (Auth::user()->role != 'eselon3')
                                     <option value="eselon2">Eselon 2</option>
@@ -141,7 +141,7 @@
                         <div id="unit-kerja-selector" class="form-group"></div>
                 </div>
                 <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Generate</button>
+                        <button id="generate" type="submit" class="btn btn-success">Generate</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
                     </form>
                 </div>

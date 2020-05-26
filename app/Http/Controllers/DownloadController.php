@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReportExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DownloadController extends Controller
 {
@@ -45,7 +47,7 @@ class DownloadController extends Controller
                 foreach ($data as $i => $row) {
                     $output .=
                     "<div class='form-check'>
-                        <input class='form-check-input' type='checkbox' value='$row->kode_eselon2' id='checkbox$i' name='check'>
+                        <input class='form-check-input' type='checkbox' value='$row->kode_eselon2' id='checkbox$i' name='check[]'>
                         <label class='form-check-label' for='checkbox$i'>
                             $row->unit_eselon2
                         </label>
@@ -78,7 +80,7 @@ class DownloadController extends Controller
                 foreach ($data as $i => $row) {
                     $output .=
                     "<div class='form-check'>
-                        <input class='form-check-input' type='checkbox' value='$row->kode_eselon3' id='checkbox$i' name='check'>
+                        <input class='form-check-input' type='checkbox' value='$row->kode_eselon3' id='checkbox$i' name='check[]'>
                         <label class='form-check-label' for='checkbox$i'>
                             $row->unit_eselon3
                         </label>
@@ -88,5 +90,23 @@ class DownloadController extends Controller
                 return $output;
                 break;
         }
+    }
+
+    //download
+    public function export(Request $request) {
+        $jenis_data = $request->jenis_data;
+        $level_unit_kerja = $request->filter;
+        $unit_kerja = $request->check;
+
+        switch ($jenis_data) {
+            case 'raw':
+                $filename = 'Report_raw.xlsx';
+                break;
+            case 'agregat':
+                $filename = 'Report_ag.xlsx';
+                break;
+        }
+
+        return Excel::download(new ReportExport($jenis_data, $level_unit_kerja, $unit_kerja), $filename);
     }
 }

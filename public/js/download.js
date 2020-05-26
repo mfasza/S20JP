@@ -15,11 +15,22 @@ $(document).ready(function(){
             })
         }
     });
+
+    $('#generate').click(function(){
+        checked = $('input[type=checkbox]:checked').length;
+        firstCheckbox = $('input[type=checkbox]')[1];
+        firstCheckbox.setCustomValidity('');
+
+        if (!checked) {
+            const errorMessage = 'At least one checkbox must be selected.';
+            firstCheckbox.setCustomValidity(errorMessage);
+        }
+    })
 });
 
 // toggle untuk pilih semua
 function toggle(source) {
-    checkboxes = document.getElementsByName('check');
+    checkboxes = document.getElementsByName('check[]');
     for(var i=0, n=checkboxes.length;i<n;i++) {
       checkboxes[i].checked = source.checked;
     }

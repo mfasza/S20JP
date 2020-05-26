@@ -44,3 +44,4 @@ Route::get('/bantuan/panduan', "BantuanController@panduan");
 Route::get('/bantuan/kodeUnitKerja', "BantuanController@kodeUnitKerja");
 
 Route::post('/report/selection', "DownloadController@selection");
+Route::post('/report/download', "DownloadController@export")->name('download');
