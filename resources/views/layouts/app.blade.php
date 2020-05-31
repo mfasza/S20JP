@@ -44,7 +44,7 @@
                         <a class="nav-link" href="{{ route('kompetensi.view') }}">{{ __('Kompetensi') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-target="#modal-report" data-backdrop="static" data-toggle="modal">{{ __('Generate Report') }}</a>
+                        <a class="nav-link" href="" data-target="#modal-report" data-backdrop="static" data-toggle="modal">{{ __('Unduh') }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="navbarBantuan" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Bantuan</a><span class="caret"></span>
@@ -109,7 +109,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5><span class="icon"><i class='icon-download-alt'></i></span>&nbsp;Generate Report</h5>
+                    <h5><span class="icon"><i class='icon-download-alt'></i></span>&nbsp;Unduh Data</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -138,10 +138,15 @@
                             </select>
                         </div>
 
-                        <div id="unit-kerja-selector" class="form-group"></div>
+                        <label for="unit-kerja-selector"><h6>Unit Kerja: </h6></label>
+                        <div id="unit-kerja-selector" class="form-group" style='width: 100%; height: 200px; overflow: auto; border: 1px solid #999; padding: 15px;'>
+                            <label class='form-check-label' for='all'>
+                                Pilihan unit kerja akan muncul setelah Anda memilih filter
+                            </label>
+                        </div>
                 </div>
                 <div class="modal-footer">
-                        <button id="generate" type="submit" class="btn btn-success">Generate</button>
+                        <button id="generate" type="submit" class="btn btn-success">Unduh</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
                     </form>
                 </div>

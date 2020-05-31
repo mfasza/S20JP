@@ -22,7 +22,7 @@ $(document).ready(function(){
         firstCheckbox.setCustomValidity('');
 
         if (!checked) {
-            const errorMessage = 'At least one checkbox must be selected.';
+            const errorMessage = 'Pilih paling tidak satu unit kerja.';
             firstCheckbox.setCustomValidity(errorMessage);
         }
     })
