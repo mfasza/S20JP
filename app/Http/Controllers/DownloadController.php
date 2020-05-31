@@ -37,13 +37,12 @@ class DownloadController extends Controller
                         break;
                 }
                 $output =
-                "<div style='width: 100%; height: 200px; overflow: auto; border: 1px solid #999; padding: 15px;'>
-                    <div class='form-check'>
-                        <input class='form-check-input' type='checkbox' onClick='toggle(this)' id='all'>
-                        <label class='form-check-label' for='all'>
-                            Pilih Semua
-                        </label>
-                    </div>";
+                "<div class='form-check'>
+                    <input class='form-check-input' type='checkbox' onClick='toggle(this)' id='all'>
+                    <label class='form-check-label' for='all'>
+                        Pilih Semua
+                    </label>
+                </div>";
                 foreach ($data as $i => $row) {
                     $output .=
                     "<div class='form-check'>
@@ -53,7 +52,6 @@ class DownloadController extends Controller
                         </label>
                     </div>";
                 }
-                $output .= "</div>";
                 return $output;
                 break;
 
