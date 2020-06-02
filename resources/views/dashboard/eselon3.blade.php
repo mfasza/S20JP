@@ -17,7 +17,7 @@
                             <li>
                                 {{$satkers[0]->unit_kerja}}
                                 <span class='pull-right strong'>{{$satkers[0]->tot_jp}}%</span>
-                                <div class="progress progress-striped progress-warning">
+                                <div class="progress progress-striped @if($satkers[0]->tot_jp <= 10) progress-danger @elseif($satkers[0]->tot_jp <= 30) progress-warning @elseif($satkers[0]->tot_jp >=90) progress-success @else progress-striped @endif">
                                     <div style="width: {{$satkers[0]->tot_jp}}%" class='bar'></div>
                                 </div>
                             </li>

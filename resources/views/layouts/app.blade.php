@@ -140,9 +140,12 @@
 
                         <label for="unit-kerja-selector"><h6>Unit Kerja: </h6></label>
                         <div id="unit-kerja-selector" class="form-group" style='width: 100%; height: 200px; overflow: auto; border: 1px solid #999; padding: 15px;'>
-                            <label class='form-check-label' for='all'>
-                                Pilihan unit kerja akan muncul setelah Anda memilih filter
-                            </label>
+                            <div class='form-check'>
+                                <input class='form-check-input' type='checkbox' onClick='toggle(this)' id='all'>
+                                <label class='form-check-label' for='all'>
+                                    Pilih Semua
+                                </label>
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -155,5 +158,24 @@
     </div>
     {{-- akhir modal generate report --}}
 <script src="{{asset('js/download.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        document.getElementById('filter').addEventListener('change', function(){
+            if($(this).val() != ''){
+                var value = $(this).val();
+                var _token = $('input[name="_token"]').val();
+
+                $.ajax({
+                    url : "{{url('/report/selection')}}",
+                    type : "post",
+                    data : {value: value, _token: _token},
+                    success : function(result){
+                        $('#unit-kerja-selector').html(result);
+                    }
+                })
+            }
+        });
+    });
+</script>
 </body>
 </html>

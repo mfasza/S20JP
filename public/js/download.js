@@ -1,21 +1,5 @@
 // ajax untuk menampilkan pilihan unit kerja
 $(document).ready(function(){
-    document.getElementById('filter').addEventListener('change', function(){
-        if($(this).val() != ''){
-            var value = $(this).val();
-            var _token = $('input[name="_token"]').val();
-
-            $.ajax({
-                url : "../report/selection",
-                type : "post",
-                data : {value: value, _token: _token},
-                success : function(result){
-                    $('#unit-kerja-selector').html(result);
-                }
-            })
-        }
-    });
-
     $('#generate').click(function(){
         checked = $('input[type=checkbox]:checked').length;
         firstCheckbox = $('input[type=checkbox]')[1];
