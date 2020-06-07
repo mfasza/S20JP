@@ -590,6 +590,8 @@ class DashboardController extends Controller
                 $jenisProgresbar='progress-warning';
             } elseif ($s->tot_jp >= 90) {
                 $jenisProgresbar='progress-success';
+            } else {
+                $jenisProgresbar='';
             };
             $html .= "<li>".
                         $s->unit_kerja.
@@ -642,6 +644,8 @@ class DashboardController extends Controller
                 $jenisProgresbar='progress-warning';
             } elseif ($s->tot_jp >= 90) {
                 $jenisProgresbar='progress-success';
+            } else {
+                $jenisProgresbar='';
             };
             $html .= "<li>".
                         $s->unit_eselon3.
