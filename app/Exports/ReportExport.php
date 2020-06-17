@@ -42,7 +42,7 @@ class ReportExport implements FromCollection, WithHeadings, ShouldAutoSize, With
                 ->leftJoin('kompetensi_pegawai', 'pegawai.nip', 'kompetensi_pegawai.nip')
                 ->leftJoin('kompetensi', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
                 ->leftJoin('jenis_pengembangan', 'kompetensi.kode_pengembangan', 'jenis_pengembangan.kode_pengembangan')
-                ->select('pegawai.nip', 'nama', 'unit_eselon2', 'unit_eselon3', 'jenis_pengembangan.kode_pengembangan', 'jenis_pengembangan', 'jp')
+                ->select('pegawai.nip', 'nama', 'unit_eselon2', 'unit_eselon3', 'jenis_pengembangan.kode_pengembangan', 'jenis_pengembangan', 'kompetensi.penyelenggara', 'jp')
                 ->whereIn('eselon3.kode_'.$this->level_unit_kerja, $this->unit_kerja)
                 ->orderBy('nama', 'asc')
                 ->get();
@@ -55,6 +55,7 @@ class ReportExport implements FromCollection, WithHeadings, ShouldAutoSize, With
                     $data[$i]['kode_eselon3'] = $pgw->unit_eselon3;
                     $data[$i]['kode_pengembangan'] = ($pgw->kode_pengembangan == null) ? '-' : $pgw->kode_pengembangan ;
                     $data[$i]['jenis_pengembangan'] = ($pgw->jenis_pengembangan == null) ? '-' : $pgw->jenis_pengembangan ;
+                    $data[$i]['penyelenggara'] = ($pgw->penyelenggara == null) ? '-' : $pgw->penyelenggara ;
                     $data[$i]['jp'] = ($pgw->jp == null) ? '-' : $pgw->jp;
                 }
                 break;
@@ -98,6 +99,7 @@ class ReportExport implements FromCollection, WithHeadings, ShouldAutoSize, With
                     'Unit Kerja Eselon 3',
                     'Kode Pengembangan',
                     'Jenis/Jalur Pengembangan',
+                    'Penyelenggara',
                     'JP'
                 ];
                 break;
