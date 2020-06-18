@@ -85,7 +85,7 @@ class KompetensiController extends Controller
             case 'eselon2':
                 $nip = getNIP('kode_eselon2');
                 break;
-            
+
             case 'eselon3':
                 $nip = getNIP('kode_eselon3');
                 break;
@@ -112,7 +112,7 @@ class KompetensiController extends Controller
         ])->validate();
         KompetensiPegawai::firstOrCreate([
             'nip' => $request->nip,
-            'id_kompetensi' => 
+            'id_kompetensi' =>
             Kompetensi::firstOrCreate([
                 'tanggal_mulai' => $request->tgl_start,
                 'tanggal_selesai' => $request->tgl_end,
@@ -133,7 +133,7 @@ class KompetensiController extends Controller
         $this->validate($request, [
             'excelFile' => 'required|mimes:xlsx,xls,csv'
         ],[
-            'excelFile.mimes' => 'Format dokumen tidak sesuai.'
+            'excelFile.mimes' => 'Format dokumen harus berekstensi .xlsx'
         ]);
         $import = new KompetensiImport();
         try {
@@ -258,7 +258,7 @@ class KompetensiController extends Controller
             case 'eselon2':
                 $nip = getNIP('kode_eselon2');
                 break;
-            
+
             case 'eselon3':
                 $nip = getNIP('kode_eselon3');
                 break;

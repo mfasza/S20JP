@@ -13,7 +13,7 @@
         <!-- Input Success -->
         @if($sukses = session('sukses'))
             <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
+                <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $sukses }}</strong>
             </div>
         @endif
@@ -21,14 +21,14 @@
         @error('Kode Unit Eselon 3')
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert">&times</button>
-                <strong>Mohon lakukan perbaikan pada data dan submit ulang:</strong><br>
+                <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
                 <strong>{{$message}}</strong>
             </div>
         @enderror
         @if($e = session('error'))
             <div class="alert alert-danger alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
-                <strong>Mohon lakukan perbaikan pada data dan submit ulang:</strong><br>
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
                 @foreach($e as $error)
                     <strong>{{ '('.$error->row().'.'.$error->attribute().'):' }}</strong>
                     @foreach($error->errors() as $msg)
@@ -37,7 +37,7 @@
                 @endforeach
             </div>
         @endif
-        <table class="table table-striped table-bordered" id="tabel" style="width:100%"> 
+        <table class="table table-striped table-bordered" id="tabel" style="width:100%">
             <thead>
                 <tr>
                     <th>NIP</th>
@@ -59,7 +59,7 @@
                             <button class="btn btn-sm btn-danger hapus" data-id="{{$p->nip}}" data-backdrop="static" data-toggle="modal" data-target="#modal-hapus">Hapus</button>
                         </td>
                     </tr>
-                @endforeach            
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -97,7 +97,7 @@
                     @csrf
                     <label>Pilih file excel:</label>
                     <div class="form-group">
-                        <input class="form-control-file @error('excelFile') is-invalid @enderror" type="file" name="excelFile" required accept=".xlsx,.xls,.csv">
+                        <input class="form-control-file @error('excelFile') is-invalid @enderror" type="file" name="excelFile" required accept=".xlsx">
 
                         @error('excelFile')
                             <span class="invalid-feedback" role="alert">

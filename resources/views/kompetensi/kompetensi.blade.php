@@ -21,7 +21,7 @@
         @if(!empty($errors->all()))
             <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Mohon lakukan perbaikan pada data dan submit ulang:</strong><br>
+                <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
                 <strong>{{ $errors->first() }}</strong><br>
             </div>
         @endif
@@ -67,7 +67,7 @@
                     @csrf
                     <label for="excelFile">Pilih file excel:</label>
                     <div class="form-group">
-                        <input type="file" class="form-control-file @error('excelFile') is-invalid @enderror" name='excelFile' required accept=".xlsx,.xls,.csv">
+                        <input type="file" class="form-control-file @error('excelFile') is-invalid @enderror" name='excelFile' required accept=".xlsx">
 
                         @error('excelFile')
                             <span class="invalid-feedback" role="alert">
