@@ -39,7 +39,7 @@ class Eselon2Import_p implements ToModel, WithHeadingRow, WithValidation
         return [
             '*.NIP' => 'required|digits:18|unique:pegawai,nip',
             '*.Nama' => 'required|string|regex:/^[a-zA-Z .\']+$/u',
-            '*.Kode Unit Eselon 3' => ['nullable','numeric', 'exists:eselon3,kode_eselon3', Rule::in($list_es3)]
+            '*.Kode Unit Eselon 3' => ['nullable','numeric', 'exists:eselon3,kode_eselon3', 'bail', Rule::in($list_es3)]
         ];
     }
     /**
@@ -53,7 +53,7 @@ class Eselon2Import_p implements ToModel, WithHeadingRow, WithValidation
             '*.NIP.unique' => 'NIP sudah terdaftar di database. Mohon periksa kembali.',
             '*.Nama.regex' => 'Kolom Nama hanya dapat diisi dengan huruf.',
             '*.Kode Unit Eselon 3.in' => ':attribute yang Anda masukkan tidak berada dibawah unit kerja Anda.',
-            '*.Kode Unit Eselon 3.exists' => ':attribute yang Anda masukkan salah. Lihat daftar master unit kerja.',
+            '*.Kode Unit Eselon 3.exists' => ':attribute yang Anda masukkan salah. Lihat daftar kode unit kerja.',
             '*.numeric' => 'Kolom :attribute hanya dapat diisi dengan angka.',
             '*.required' => 'Kolom :attribute tidak boleh kosong.'
         ];

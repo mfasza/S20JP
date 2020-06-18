@@ -18,19 +18,12 @@
             </div>
         @endif
         <!-- Error for excel validation -->
-        @error('Kode Unit Eselon 3')
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert">&times</button>
-                <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
-                <strong>{{$message}}</strong>
-            </div>
-        @enderror
         @if($e = session('error'))
             <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
                 @foreach($e as $error)
-                    <strong>{{ '('.$error->row().'.'.$error->attribute().'):' }}</strong>
+                    <strong>{{ '(Baris '.$error->row().':Kolom '.$error->attribute().'):' }}</strong>
                     @foreach($error->errors() as $msg)
                         <strong>&nbsp{{$msg}}</strong><br>
                     @endforeach

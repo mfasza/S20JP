@@ -15,7 +15,7 @@ use Maatwebsite\Excel\Validators\Failure;
 class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
 {
     use Importable;
-    private $baris = 2;
+    private $kode_es2 = '';
     /**
     * @param array $row
     *
@@ -23,13 +23,8 @@ class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
     */
     public function model(array $row)
     {
-        $list_es3 = DB::table('eselon3')->where('kode_eselon2', '=', $row['Kode Unit Eselon 2'])->pluck('kode_eselon3')->toArray();
-        Validator::make($row,[
-            'Kode Unit Eselon 3' => ['nullable', Rule::in($list_es3)]
-        ],[
-            'Kode Unit Eselon 3.in' => "($this->baris.Kode Unit Eselon 3): Kode Unit Eselon 3 berada diluar Kode Unit Eselon 2 yang Anda masukkan."
-        ])->validate();
-        $this->baris += 1;
+        $this->kode_es2 = $row['Kode Unit Eselon 2'];
+
         return new Pegawai([
             'nip' => $row['NIP'],
             'nama' => $row['Nama'],
@@ -43,11 +38,13 @@ class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
      */
     public function rules():array
     {
+        $list_es3 = DB::table('eselon3')->where('kode_eselon2', '=', $this->kode_es2)->pluck('kode_eselon3')->toArray();
+
         return [
             '*.NIP' => 'required|digits:18|unique:pegawai,nip',
             '*.Nama' => 'required|string|regex:/^[a-zA-Z .\']+$/u',
             '*.Kode Unit Eselon 2' => 'required|numeric|exists:eselon2,kode_eselon2',
-            '*.Kode Unit Eselon 3' => 'nullable|numeric'
+            '*.Kode Unit Eselon 3' => ['nullable','numeric', 'exists:eselon3,kode_eselon3', 'bail', Rule::in($list_es3)]
         ];
     }
     /**
@@ -61,7 +58,10 @@ class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
             '*.NIP.unique' => 'NIP sudah terdaftar di database. Mohon periksa kembali.',
             '*.Nama.regex' => 'Kolom Nama hanya dapat diisi dengan huruf.',
             '*.Kode Unit Eselon 2.exists' => ':attribute yang Anda masukkan salah. Lihat daftar master unit kerja.',
+            '*.Kode Unit Eselon 3.in' => ':attribute yang Anda masukkan tidak sesuai dengan Kode Unit Eselon 2 yang Anda masukkan.',
+            '*.Kode Unit Eselon 3.exists' => ':attribute yang Anda masukkan salah. Lihat daftar kode unit kerja.',
             '*.numeric' => 'Kolom :attribute hanya dapat diisi dengan angka.',
+            '*.string' => 'Kolom :attribute hanya dapat diisi dengan huruf.',
             '*.required' => 'Kolom :attribute tidak boleh kosong.'
         ];
     }
