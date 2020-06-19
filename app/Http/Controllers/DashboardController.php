@@ -51,7 +51,7 @@ class DashboardController extends Controller
 
                 // menghitung persentasi capaian 20 jp Indonesia
                 $obj = new \stdClass();
-                $obj->tot_jp = round($jp / $jml_peg->jml_peg * 100, 2);
+                $obj->tot_jp = ($jml_peg->jml_peg == 0) ? 0 : round($jp / $jml_peg->jml_peg * 100, 2);
                 $obj->unit_kerja = 'Indonesia';
                 $satkers = [json_decode(json_encode($obj))];
 
