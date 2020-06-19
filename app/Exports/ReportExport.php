@@ -127,7 +127,7 @@ class ReportExport implements FromCollection, WithHeadings, ShouldAutoSize, With
             case 'raw':
                 $column_format = [
                     'A' => NumberFormat::FORMAT_TEXT,
-                    'G' => NumberFormat::FORMAT_NUMBER
+                    'H' => NumberFormat::FORMAT_NUMBER
                 ];
                 break;
 

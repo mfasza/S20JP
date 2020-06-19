@@ -18,6 +18,13 @@
             </div>
         @endif
         <!-- Error for excel validation -->
+        @error('Kode Unit Eselon 3')
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Mohon lakukan perbaikan data pada file excel dan lakukan upload ulang:</strong><br>
+                <strong>{{$message}}</strong>
+            </div>
+        @enderror
         @if($e = session('error'))
             <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
