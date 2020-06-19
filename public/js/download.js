@@ -19,3 +19,19 @@ function toggle(source) {
       checkboxes[i].checked = source.checked;
     }
 }
+
+
+// untuk mengaktifkan selected navbar
+$(document).ready(function () {
+    var url = window.location;
+
+    $('li.nav-item a[href="'+ url +'"]').parent().addClass('active');
+    $('li.nav-item a').filter(function() {
+         return this.href == url;
+    }).parent().addClass('active');
+
+    $('li.nav-item.dropdown a[href="'+ url +'"]').parent().parent().addClass('active');
+    $('li.nav-item.dropdown a').filter(function() {
+         return this.href == url;
+    }).parent().parent().addClass('active');
+});

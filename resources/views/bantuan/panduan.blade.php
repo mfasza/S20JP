@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <!-- A vertical navbar -->
-                <nav class="navbar justify-content-center align-content-start bg-light navbar-light border-right sticky-top shadow-sm">
+                <nav class="navbar bg-light navbar-light border-right sticky-top shadow-sm" style='z-index: auto'>
                     <!-- Links -->
                     <dl class="navbar-nav">
                         <dt class="nav-item">
