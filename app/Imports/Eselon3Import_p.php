@@ -26,7 +26,8 @@ class Eselon3Import_p implements ToModel, WithHeadingRow, WithValidation
             'nip' => $row['NIP'],
             'nama' => $row['Nama'],
             'kode_eselon2' => $es2,
-            'kode_eselon3' => Auth::user()->kode_satker
+            'kode_eselon3' => Auth::user()->kode_satker,
+            'editor' => Auth::user()->kode_satker
         ]);
     }
     /**

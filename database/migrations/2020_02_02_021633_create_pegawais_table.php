@@ -18,6 +18,8 @@ class CreatePegawaisTable extends Migration
             $table->string('nama');
             $table->bigInteger('kode_eselon2')->unsigned();
             $table->bigInteger('kode_eselon3')->unsigned()->nullable();
+            $table->timestamps();
+            $table->integer('editor');
             $table->foreign('kode_eselon2')->references('kode_eselon2')->on('eselon2')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('kode_eselon3')->references('kode_eselon3')->on('eselon3')->onDelete('cascade')->onUpdate('cascade');
         });

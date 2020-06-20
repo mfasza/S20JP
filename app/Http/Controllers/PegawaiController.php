@@ -42,7 +42,7 @@ class PegawaiController extends Controller
             case 'eselon2':
                 $pegawai = getPegawai('kode_eselon2');
                 break;
-            
+
             case 'eselon3':
                 $pegawai = getPegawai('kode_eselon3');
                 break;
@@ -117,7 +117,8 @@ class PegawaiController extends Controller
             'nip' => $request->nip,
             'nama' => $request->nama,
             'kode_eselon2' => $request->eselon2,
-            'kode_eselon3' => $request->eselon3
+            'kode_eselon3' => $request->eselon3,
+            'editor' => Auth::user()->kode_satker
         ]);
         Session::flash('sukses', 'Data berhasil ditambahkan.');
         return redirect(route('pegawai.view'));
@@ -234,11 +235,12 @@ class PegawaiController extends Controller
             'nama.regex' => 'Kolom Nama hanya dapat diisi dengan huruf.'
         ]);
         $pegawai = Pegawai::findOrFail($nip);
-            $pegawai->nip = $request->nip;
-            $pegawai->nama = $request->nama;
-            $pegawai->kode_eselon2 = $request->eselon2;
-            $pegawai->kode_eselon3 = $request->eselon3;
-            $pegawai->save();
+        $pegawai->nip = $request->nip;
+        $pegawai->nama = $request->nama;
+        $pegawai->kode_eselon2 = $request->eselon2;
+        $pegawai->kode_eselon3 = $request->eselon3;
+        $pegawai->editor = Auth::user()->kode_satker;
+        $pegawai->save();
         Session::flash('sukses', 'Data berhasil diubah.');
         return redirect(route('pegawai.view'));
     }

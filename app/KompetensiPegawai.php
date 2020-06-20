@@ -10,7 +10,7 @@ class KompetensiPegawai extends Model
     use HasCompositePrimaryKey;
     /**
      * Make model handle kompetensi_pegawai table not kompetensi_pegawais
-     * 
+     *
      * @var string
      */
     protected $table = 'kompetensi_pegawai';
@@ -21,19 +21,19 @@ class KompetensiPegawai extends Model
      * @var array
      */
     protected $fillable = [
-        'id_kompetensi', 'nip'
+        'id_kompetensi', 'nip', 'editor'
     ];
 
     /**
      * override default primary key to id_kompetensi column
-     * 
+     *
      * @var string
      */
     protected $primaryKey = ['nip', 'id_kompetensi'];
 
     /**
      * Menghilangkan default setting for incrementing primary key
-     * 
+     *
      * @var bool
      */
     public $incrementing = false;
@@ -41,14 +41,14 @@ class KompetensiPegawai extends Model
     /**
      * setting tabel kompetensi tidak ada timestamps
      * (created_at & update_at)
-     * 
+     *
      *  @var string
      */
-    public $timestamps = false;
+    // public $timestamps = false;
 
     /**
      * One to many eloquent with kompetensi table
-     * 
+     *
      * @return App\Kompetensi
      */
     public function kompetensi()
@@ -58,7 +58,7 @@ class KompetensiPegawai extends Model
 
     /**
      * One to many eloquent with pegawai table
-     * 
+     *
      * @return App\Pegawai
      */
     public function pegawai()

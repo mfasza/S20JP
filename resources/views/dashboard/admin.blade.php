@@ -84,9 +84,13 @@
                     </div>
                     <div id="top3_peg" class="widget-content text-center">
                         <ul class="unstyled">
-                            @foreach($top3_peg as $l)
-                        <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
-                            @endforeach
+                            @if(sizeof($top3_peg)==0)
+                                <li>Data Tidak Tersedia</li>
+                            @else
+                                @foreach($top3_peg as $l)
+                                <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -98,9 +102,13 @@
                     </div>
                     <div id="bottom3_peg" class="widget-content text-center">
                         <ul class="unstyled">
-                            @foreach($bottom3_peg as $l)
-                            <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
-                            @endforeach
+                            @if(sizeof($bottom3_peg)==0)
+                                <li>Data Tidak Tersedia</li>
+                            @else
+                                @foreach($bottom3_peg as $l)
+                                <li><a href="{{url('/kompetensi/detil', $l->nip)}}">{{$l->nama}} - @if($l->unit_eselon3 == null) {{$l->unit_eselon2}} @else {{$l->unit_eselon3}} @endif</a></li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

@@ -73,18 +73,23 @@ class KompetensiImport implements ToCollection, WithHeadingRow
         }
 
         foreach ($data as $row) {
-            KompetensiPegawai::firstOrCreate([
+            $id_komp = Kompetensi::firstOrCreate([
+                'tanggal_mulai' => $row['Tanggal Mulai'],
+                'tanggal_selesai' => $row['Tanggal Selesai'],
+                'nama_pengembangan' => $row['Nama Kegiatan'],
+                'penyelenggara' => $row['Penyelenggara Kegiatan'],
+                'jp' => $row['Total Jam Pelajaran'],
+                'kode_pengembangan' => $row['Kode Jenis Pengembangan']
+            ])->id_kompetensi;
+            $komp_peg = KompetensiPegawai::firstOrCreate([
                 'nip' => $row['NIP Peserta'],
-                'id_kompetensi' =>
-                Kompetensi::firstOrCreate([
-                    'tanggal_mulai' => $row['Tanggal Mulai'],
-                    'tanggal_selesai' => $row['Tanggal Selesai'],
-                    'nama_pengembangan' => $row['Nama Kegiatan'],
-                    'penyelenggara' => $row['Penyelenggara Kegiatan'],
-                    'jp' => $row['Total Jam Pelajaran'],
-                    'kode_pengembangan' => $row['Kode Jenis Pengembangan'],
-                ])->id_kompetensi
+                'id_kompetensi' => $id_komp,
             ]);
+            $komp = Kompetensi::where('id_kompetensi', $id_komp)->first();
+            $komp->editor = Auth::user()->kode_satker;
+            $komp->save();
+            $komp_peg->editor = Auth::user()->kode_satker;
+            $komp_peg->save();
         }
     }
 }

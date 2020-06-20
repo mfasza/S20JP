@@ -16,6 +16,8 @@ class CreateKompetensiPegawaisTable extends Migration
         Schema::create('kompetensi_pegawai', function (Blueprint $table) {
             $table->bigInteger('nip')->unsigned();
             $table->bigInteger('id_kompetensi')->unsigned();
+            $table->timestamps();
+            $table->integer('editor')->nullable();
             $table->foreign('nip')->references('nip')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_kompetensi')->references('id_kompetensi')->on('kompetensi')->onDelete('cascade')->onUpdate('cascade');
             $table->primary(['nip', 'id_kompetensi']);

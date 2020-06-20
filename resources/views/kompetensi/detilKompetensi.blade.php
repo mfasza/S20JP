@@ -16,6 +16,13 @@
                 <strong>{{ $sukses }}</strong>
             </div>
         @endif
+        <!-- Error messages -->
+        @if(!empty($errors->all()))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $errors->first() }}</strong><br>
+            </div>
+        @endif
         <table class="table table-striped table-bordered" id="tabel" style="width:100%">
             <thead>
                 <tr>

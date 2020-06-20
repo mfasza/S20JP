@@ -109,19 +109,24 @@ class KompetensiController extends Controller
             'nip.exists' => 'NIP tidak tersedia. Periksa apakah pegawai sudah terdaftar.',
             'digits' => 'Masukkan :digits digit NIP dengan benar.',
             'in' => 'Pegawai dengan NIP yang Anda masukkan diluar otoritas Anda.',
-        ])->validate();
-        KompetensiPegawai::firstOrCreate([
+            ])->validate();
+        $id_komp = Kompetensi::firstOrCreate([
+            'tanggal_mulai' => $request->tgl_start,
+            'tanggal_selesai' => $request->tgl_end,
+            'nama_pengembangan' => $request->nama_acara,
+            'penyelenggara' => $request->penyelenggara,
+            'jp' => $request->jp,
+            'kode_pengembangan' => $request->kode_pengembangan
+        ])->id_kompetensi;
+        $komp_peg = KompetensiPegawai::firstOrCreate([
             'nip' => $request->nip,
-            'id_kompetensi' =>
-            Kompetensi::firstOrCreate([
-                'tanggal_mulai' => $request->tgl_start,
-                'tanggal_selesai' => $request->tgl_end,
-                'nama_pengembangan' => $request->nama_acara,
-                'penyelenggara' => $request->penyelenggara,
-                'jp' => $request->jp,
-                'kode_pengembangan' => $request->kode_pengembangan,
-            ])->id_kompetensi
+            'id_kompetensi' => $id_komp,
         ]);
+        $komp = Kompetensi::where('id_kompetensi', $id_komp)->first();
+        $komp->editor = Auth::user()->kode_satker;
+        $komp->save();
+        $komp_peg->editor = Auth::user()->kode_satker;
+        $komp_peg->save();
         Session::flash('sukses', 'Data berhasil ditambahkan.');
         return redirect(route('kompetensi.view'));
     }
@@ -290,11 +295,28 @@ class KompetensiController extends Controller
             'nama_pengembangan' => $request->nama_acara,
             'penyelenggara' => $request->penyelenggara,
             'jp' => $request->jp,
-            'kode_pengembangan' => $request->kode_pengembangan,
+            'kode_pengembangan' => $request->kode_pengembangan
         ])->id_kompetensi;
         $komp_peg ->nip = $nip_peg;
         $komp_peg->id_kompetensi = $id_komp;
-        $komp_peg->save();
+        $komp_peg->editor = Auth::user()->kode_satker;
+        try {
+            $komp_peg->save();
+            $komp = Kompetensi::where('id_kompetensi', $id_komp)->first();
+            $komp->editor = Auth::user()->kode_satker;
+            $komp->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect(url('/kompetensi/detil', $request->nip))->withErrors('Riwayat pengembangan sudah ada dalam daftar, tidak dapat menambah riwayat yang sama.');
+        }
+        $trash = Kompetensi::select(DB::raw('kompetensi.id_kompetensi, nip'))
+                ->leftJoin('kompetensi_pegawai', 'kompetensi_pegawai.id_kompetensi', 'kompetensi.id_kompetensi')
+                ->get();
+        foreach ($trash as $t) {
+            if ($t->nip == null) {
+                Kompetensi::where('id_kompetensi', $t->id_kompetensi)
+                ->delete();
+            }
+        }
         Session::flash('sukses', 'Data berhasil diperbaruhi.');
         return redirect(url('/kompetensi/detil', $request->nip));
     }

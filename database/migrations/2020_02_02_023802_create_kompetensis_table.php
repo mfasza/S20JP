@@ -21,6 +21,8 @@ class CreateKompetensisTable extends Migration
             $table->string('penyelenggara');
             $table->integer('jp');
             $table->string('kode_pengembangan',4);
+            $table->timestamps();
+            $table->integer('editor')->nullable();
             $table->foreign('kode_pengembangan')->references('kode_pengembangan')->on('jenis_pengembangan');
         });
     }

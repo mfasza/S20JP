@@ -8,7 +8,7 @@ class Pegawai extends Model
 {
     /**
      * Make model handle eselon2 table not eselon2s
-     * 
+     *
      * @var string
      */
     protected $table = 'pegawai';
@@ -19,12 +19,12 @@ class Pegawai extends Model
      * @var array
      */
     protected $fillable = [
-        'nama', 'nip', 'kode_eselon2', 'kode_eselon3'
+        'nama', 'nip', 'kode_eselon2', 'kode_eselon3', 'editor'
     ];
 
     /**
      * override default primary key to nip column
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'nip';
@@ -32,14 +32,14 @@ class Pegawai extends Model
     /**
      * setting tabel pegawai tidak ada timestamps
      * (created_at & update_at)
-     * 
+     *
      *  @var string
      */
-    public $timestamps = false;
+    // public $timestamps = false;
 
     /**
      * One to many eloquent with eselon2 table
-     * 
+     *
      * @return App\Eselon2
      */
     public function eselon2()
@@ -49,7 +49,7 @@ class Pegawai extends Model
 
     /**
      * One to many eloquent with eselon3 table
-     * 
+     *
      * @return App\Eselon3
      */
     public function eselon3()
@@ -59,12 +59,12 @@ class Pegawai extends Model
 
     /**
      * One to many eloquent with kompetensi_pegawai table
-     * 
+     *
      * @return App\KompetensiPegawai
      */
     public function kompetensi_pegawai()
     {
         return $this->hasMany('App\KompetensiPegawai', 'nip', 'nip');
     }
-    
+
 }

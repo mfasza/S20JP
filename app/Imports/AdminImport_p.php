@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Pegawai;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +39,8 @@ class AdminImport_p implements ToModel, WithHeadingRow, WithValidation
             'nip' => $row['NIP'],
             'nama' => $row['Nama'],
             'kode_eselon2' => $row['Kode Unit Eselon 2'],
-            'kode_eselon3' => $row['Kode Unit Eselon 3']
+            'kode_eselon3' => $row['Kode Unit Eselon 3'],
+            'editor' => Auth::user()->kode_satker
         ]);
     }
     /**
