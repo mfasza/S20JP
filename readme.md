@@ -16,4 +16,9 @@ Dalam PP No 11 Tahun 2017 ayat (4) menyebutkan bahwa
 Yang dimaksud dengan pengembangan kompetensi antara lain melalui pendidikan dan pelatihan, seminar, kursus, dan penataran.
 
 ### SISTEM 20JP
-Sistem 20 JP dikembangkan untuk mengumpulkan riwayat kegiatan pengembangan kompetensi yang pernah dilakukan oleh pegawai BPS di seluruh Indonesia. Selain itu Sistem 20 JP juga bermaksud untuk melihat capaian jam pelajaran (JP) dari setiap pegawai BPS. Sistem 20 JP berbasis web dengan menggunakan kerangka kerja *Laravel*.
+Sistem 20JP dikembangkan dengan tujuan untuk:
+- mengumpulkan riwayat kegiatan pengembangan kompetensi yang pernah dilakukan oleh pegawai BPS di seluruh Indonesia.
+- melihat capaian jam pelajaran (JP) dari setiap pegawai BPS
+- melihat pemenuhan hak 20 jam pelajaran pengembangan kompetensi.
+
+Sistem 20 JP berbasis web dengan menggunakan kerangka kerja [<img src="https://laravel.com/assets/img/components/logo-laravel.svg" width="150px" height="auto"/>](https://www.laravel.com)
