@@ -19,7 +19,7 @@
                         <a class="nav-link" href="#submit_pegawai">Submit Data Pegawai</a>
                         </dd>
                         <dd class="nav-item">
-                        <a class="nav-link" href="#submit_pegawai_excel">Submit Data Pegawai Menggunakan Excel</a>
+                        <a class="nav-link" href="#submit_pegawai_excel">Upload Data Pegawai Menggunakan Excel</a>
                         </dd>
                         <dt class="nav-item">
                         <a class="nav-link" href="#upload_kompetensi">Upload Data Pengembangan Kompetensi</a>
@@ -31,8 +31,11 @@
                         <a class="nav-link" href="#submit_komp">Submit Data Pengembangan Kompetensi</a>
                         </dd>
                         <dd class="nav-item">
-                        <a class="nav-link" href="#submit_komp_excel">Submit Data Pengembangan Kompetensi Menggunakan Excel</a>
+                        <a class="nav-link" href="#submit_komp_excel">Upload Data Pengembangan Kompetensi Menggunakan Excel</a>
                         </dd>
+                        <dt class="nav-item">
+                            <a class="nav-link" href="#unduh">Unduh Data</a>
+                        </dt>
                     </dl>
                 </nav>
             </div>
@@ -56,7 +59,7 @@
                     <hr>
                     <p>
                         Upload data pegawai digunakan untuk mengunggah data pegawai pada masing-masing unit kerja ke dalam sistem. Fitur ini berada pada
-                        halaman Data Pegawai yang dapat diakses dengan menekan tab <button disabled="disabled" class="btn btn-sm btn-dark">Pegawai</button>
+                        halaman Data Pegawai yang dapat diakses dengan menekan tab <span style='background-color: rgba(0,0,0,0.8); color: white; padding: 2px 7px 5px 7px'>Pegawai</span>
                         pada menu navigasi di bagian atas website.
                     </p>
                     <p>
@@ -71,45 +74,59 @@
                     </p>
                     <br>
                     <p>
-                        Terdapat dua cara mengunggah data pegawai ke dalam sistem. Tata caranya akan dijelaskan pada bagian berikut.
+                        Terdapat dua cara mengunggah data pegawai ke dalam sistem. Tata caranya akan dijelaskan pada bagian selanjutnya.
                     </p>
                     <br>
                     <h5 class="text-primary" id="submit_pegawai"># Submit Data Pegawai</h4>
                     <hr>
                     <p>
-                        Jika data yang akan diunggah hanya data satu pegawai, Anda dapat menggunakana fitur <strong><em>Submit Pegawai</em></strong>
-                        dengan cara menekan tombol <button disabled="disabled" class="btn btn-sm btn-primary">Submit Pegawai</button>
+                        Jika data yang akan diunggah hanya data satu pegawai, Anda dapat menggunakan form input pada fitur <strong><em>Submit Pegawai</em></strong>
+                        dengan cara menekan tombol <button class="btn btn-sm btn-primary">Submit Pegawai</button>
                         yang terletak pada bagian atas tabel Data Pegawai.
+                    </p>
+                    <p>
+                        <img src="{{asset('img/input_pegawai.png')}}" alt="form pegawai"style="max-width: 100%">
+                    </p>
+                    <p>
+                        Masukkan informasi pegawai seperti NIP, Nama, Kode Unit Eselon 2, dan Kode Unit Eselon 3. Setelah seluruh data yang dimasukkan dirasa sudah benar, tekan tombol <button class="btn btn-small btn-success">Register</button>
+                        untuk menyimpan data ke dalam sistem.
+                    </p>
+                    <br>
+                    <h5 class="text-primary" id="submit_pegawai_excel"># Upload Data Pegawai Menggunakan Excel</h4>
+                    <hr>
+                    <p>
+                        Jika data yang akan diunggah cukup banyak, Anda dapat menggunakan fitur <em><strong>Upload Pegawai</strong></em>
+                        dengan cara menekan tombol <button class="btn btn-primary btn-sm">Upload Pegawai</button>
+                        yang terletak pada bagian atas tabel Data Pegawai agar dapat menggunggah data sekaligus menggunakan file <em>Excel</em>.
+                    </p>
+                    <p>
+                        Anda akan diminta untuk mengunggah file dengan format <strong><em>.xlsx</em></strong> yang telah berisi data pegawai. Template excel dapat diunduh dengan menekan tautan <span style="background-color: #999; font-style: italic; padding: 0 3px 0 3px">Download template Excel untuk import data pegawai</span> yang terletak di bagian bawah opsi Pilih file excel.
+                    </p>
+                    <p>
+                        <img src="{{asset('img/xls_peg.png')}}" alt="template excel" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Masukkan informasi pegawai yang akan diunggah sesuai kolom pada file template excel yang telah diunduh. Template file Excel untuk akun admin, unit kerja level eselon 2, dan unit kerja level eselon 3 berturut-turut dapat dilihat sebagai berikut.
+                    </p>
+                    <p>
+                        <img src="{{asset('img/admin_peg_xlsx.png')}}" alt="template excel admin" style="max-width: 100%">
+                    </p>
+                    <p>
+                        <img src="{{asset('img/es2_peg_xlsx.png')}}" alt="template excel eselon 2" style="max-width: 100%">
+                    </p>
+                    <p>
+                        <img src="{{asset('img/es3_peg_xlsx.png')}}" alt="template excel eselon 3" style="max-width: 100%">
                     </p>
                     <br>
                     <div class="alert alert-secondary">
                         <em>
-                            <strong># Note:</strong> Daftar kode unit kerja dapat dilihat pada menu tab Bantuan >
+                            <strong># Note:</strong> Daftar kode unit kerja dapat dilihat pada menu Bantuan >
                             <a href="{{url('/bantuan/kodeUnitKerja')}}">Daftar Kode Unit Kerja</a>
                         </em>
                     </div>
                     <br>
                     <p>
-                        Setelah seluruh data yang dimasukkan dirasa sudah benar, tekan tombol <button class="btn btn-small btn-success" disabled>Register</button>
-                        untuk menyimpan data ke dalam sistem.
-                    </p>
-                    <br>
-                    <h5 class="text-primary" id="submit_pegawai_excel"># Submit Data Pegawai Menggunakan Excel</h4>
-                    <hr>
-                    <p>
-                        Jika data yang akan diunggah cukup banyak, Anda dapat menggunakan fitur <em><strong>Upload Pegawai</strong></em>
-                        dengan cara menekan tombol <button disabled="disabled" class="btn btn-primary btn-sm">Upload Pegawai</button>
-                        yang terletak pada bagian atas tabel Data Pegawai agar dapat menggunggah data sekaligus.
-                    </p>
-                    <p>
-                        Anda akan diminta untuk mengunggah file dengan format <strong>.xls</strong> yang telah berisi data pegawai.
-                        Template excel dapat diunduh dengan menekan tautan yang terletak di bagian bawah opsi Pilih file excel.
-                        <img src="{{asset('img/xls_peg.png')}}" alt="template excel" style="max-width: 100%">
-                    </p>
-                    <p>
-                        Isi data pegawai yang akan diunggah pada file template excel yang telah diunduh. Simpan file excel yang telah berisi data.
-                        pilih file melalui opsi <em>Pilih file excel</em>, kemudian tekan tombol <button disabled="disabled" class="btn btn-sm btn-success">Import</button>
-                        untuk menyimpan data ke dalam sistem.
+                        Simpan file excel yang telah berisi data. Unggah file excel melalui opsi <em>Pilih file excel</em>, kemudian klik tombol <button class="btn btn-sm btn-success">Import</button> untuk menyimpan data ke dalam sistem.
                     </p>
 
                     <br>
@@ -118,7 +135,7 @@
                     <p>
                         Upload data pengembangan kompetensi digunakan untuk mengunggah data riwayat pengembangan kompetensi yang telah diikuti pegawai
                         ke dalam sistem. Fitur ini berada pada halaman Pengembangan Kompetensi yang dapat diakses dengan menekan tab
-                        <button disabled="disabled" class="btn btn-sm btn-dark">Kompetensi</button> pada menu navigasi di bagian atas website.
+                        <span style='background-color: rgba(0,0,0,0.8); color: white; padding: 2px 7px 5px 7px'>Kompetensi</span> pada menu navigasi di bagian atas website.
                     </p>
                     <p>
                         Pada halaman Pengembangan Kompetensi ditampilkan tabel daftar pegawai serta capaian Total Jam pelajaran (JP) dari setiap pegawai.
@@ -293,29 +310,37 @@
                     <hr>
                     <p>
                         Jika data yang akan diunggah hanya satu kegiatan pengembangan kompetensi, Anda dapat menggunakana fitur <strong><em>Submit Kompetensi</em></strong>
-                        dengan cara menekan tombol <button disabled="disabled" class="btn btn-sm btn-primary">Submit Kompetensi</button>
+                        dengan cara menekan tombol <button class="btn btn-sm btn-primary">Submit Kompetensi</button>
                         yang terletak pada bagian atas tabel Data Pegawai.
                     </p>
                     <p>
-                        Setelah seluruh data yang dimasukkan dirasa sudah benar, tekan tombol <button class="btn btn-small btn-success" disabled>Register</button>
+                        <img src="{{asset('img/input_kompetensi.png')}}" alt="input kompetensi" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Masukkan informasi kegiatan pengembangan kompetensi seperti Tanggal Mulai, Tanggal Selesai, Nama Kegiatan, Penyelenggara Kegiatan, Jenis Pengembangan, Total Jam Pelajaran (yang sudah dikonversi), serta NIP pegawai yang mengikuti kegiatan tersebut. Setelah seluruh data yang dimasukkan dirasa sudah benar, tekan tombol <button class="btn btn-small btn-success">Register</button>
                         untuk menyimpan data ke dalam sistem.
                     </p>
-                    <h5 class="text-primary" id="submit_komp_excel"># Submit Data Pengembangan Kompetensi Menggunakan Excel</h4>
+                    <h5 class="text-primary" id="submit_komp_excel"># Upload Data Pengembangan Kompetensi Menggunakan Excel</h4>
                     <hr>
                     <p>
                         Jika data yang akan diunggah cukup banyak, Anda dapat menggunakan fitur <em><strong>Upload Kompetensi</strong></em>
-                        dengan cara menekan tombol <button disabled="disabled" class="btn btn-primary btn-sm">Upload Kompetensi</button>
-                        yang terletak pada bagian atas tabel Data Pegawai agar dapat menggunggah data sekaligus.
+                        dengan cara menekan tombol <button class="btn btn-primary btn-sm">Upload Kompetensi</button>
+                        yang terletak pada bagian atas tabel data pengembangan kompetensi agar dapat menggunggah data sekaligus menggunakan file <em>Excel</em>.
                     </p>
                     <p>
-                        Anda akan diminta untuk mengunggah file dengan format <strong>.xls</strong> yang telah berisi data pegawai.
-                        Template excel dapat diunduh dengan menekan tautan yang terletak di bagian bawah opsi Pilih file excel.
-                        <img src="{{asset('img/xls_komp.png')}}" alt="template excel" style="max-width: 100%">
+                        Anda akan diminta untuk mengunggah file dengan format <strong>.xlsx</strong> yang telah berisi data riwayat pengembangan kompetensi. Template excel dapat diunduh dengan menekan tautan <span style="background-color: #999; font-style: italic; padding: 0 3px 0 3px">Download template Excel untuk import data kompetensi</span> yang terletak di bagian bawah opsi Pilih file excel.
                     </p>
                     <p>
-                        Isi data pegawai yang akan diunggah pada file template excel yang telah diunduh. Simpan file excel yang telah berisi data.
-                        pilih file melalui opsi <em>Pilih file excel</em>, kemudian tekan tombol <button disabled="disabled" class="btn btn-sm btn-success">Import</button>
-                        untuk menyimpan data ke dalam sistem.
+                        <img src="{{asset('img/xls_komp.png')}}" alt="unggah kompetensi xlsx" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Masukkan data riwayat pengembangan kompetensi yang akan diunggah sesuai kolom pada file template excel yang telah diunduh. Template file Excel untuk mengunggah data riwayat pengembangan kompetensi dapat dilihat pada gambar berikut.
+                    </p>
+                    <p>
+                        <img src="{{asset('img/kompetensi_xlsx.png')}}" alt="template excel kompetensi" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Simpan file excel yang telah berisi data. Unggah file excel melalui opsi <em>Pilih file excel</em>, kemudian klik tombol <button class="btn btn-sm btn-success">Import</button> untuk menyimpan data ke dalam sistem.
                     </p>
                     <div class="alert alert-secondary">
                         <em>
@@ -324,6 +349,35 @@
                             Excel secara otomatis merubah tampilan menjadi <strong>1998-02-16</strong>.
                         </em>
                     </div>
+                    <br>
+                    <h3 class="text-primary" id="unduh"># Unduh Data</h3>
+                    <hr>
+                    <p>
+                        Fitur Unduh Data digunakan untuk mengunduh data yang tersimpan dalam sistem kedalam file Excel. Klik tab <span style='background-color: rgba(0,0,0,0.8); color: white; padding: 2px 7px 5px 7px'>Unduh</span> pada menu di bagian atas website untuk menggunakan fitur Unduh Data dan akan muncul tampilan awal seperti berikut.
+                    </p>
+                    <p>
+                        <img src="{{asset('img/unduh_data.png')}}" alt="unduh data" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Opsi pertama pada fitur ini adalah <strong>Jenis Data</strong>. Jenis data <em>raw</em> akan mengunduh detil riwayat pengembangan kompetensi dari setiap pegawai.
+                        <img src="{{asset('img/raw_xlsx.png')}}" alt="raw excel" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Jenis data <em>agregat</em> akan mengunduh data kumulatif jam pelajaran (JP) dari setiap pegawai.
+                        <img src="{{asset('img/agg_xlsx.png')}}" alt="agregat excel" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Opsi berikutnya adalah <strong>Filter</strong> dan <strong>Unit Kerja</strong>. Kedua opsi tersebut digunakan untuk memilih data pada unit kerja mana yang ingin diunduh. <strong>Filter</strong> digunakan untuk memilih level unit kerja. Pada akun unit kerja level eselon 3, hanya tersedia pilihan level eselon 3.
+                        <br>
+                        <img src="{{asset('img/filter_unduh.png')}}" alt="filter unit kerja" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Setelah memilih level unit kerja, maka pada opsi <strong>Unit Kerja</strong> akan memunculkan daftar unit kerja pada level sesuai dengan pilihan.
+                        <img src="{{asset('img/unit_kerja_unduh.png')}}" alt="pilihan unit kerja" style="max-width: 100%">
+                    </p>
+                    <p>
+                        Pengguna dapat memilih pada unit kerja mana data akan diunduh kemudian klik tombol <button class="btn btn-small btn-success">Unduh</button> untuk mengunduh data dalam bentuk file Excel.
+                    </p>
                 </div>
             </div>
         </div>
