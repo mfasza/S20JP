@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
         <title>Pusdiklat BPS 20JP</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +12,7 @@
 
     </head>
     <body>
-        <div id="loginbox">            
+        <div id="loginbox">
             <form id="loginform" class="form-vertical" action="{{route('login')}}" method="POST">
                 @csrf
                 @if (session('status'))
@@ -46,14 +46,14 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lupa password?</a></span>
                     <span class="pull-right"><a id='login' type="submit" class="btn btn-success" onclick="document.getElementById('loginform').submit()"> Login</a></span>
                 </div>
             </form>
             <form id="recoverform" action="{{route('password.email')}}" class="form-vertical" method='post'>
                 @csrf
 				<p class="normal_text">Masukkan alamat email yang anda daftarkan dan kami akan mengirimkan tautan untuk reset password.</p>
-				
+
                     <div class="controls">
                         <div class="main_input_box">
                             <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input id='email' name='email' type="text" placeholder="E-mail address" /><br>
@@ -64,15 +64,15 @@
                             @enderror
                         </div>
                     </div>
-               
+
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                    <span class="pull-right"><a id='recover' class="btn btn-info" onclick="document.getElementById('recoverform').submit()" >Recover</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Kembali</a></span>
+                    <span class="pull-right"><a id='recover' class="btn btn-info" onclick="document.getElementById('recoverform').submit()" >Pulihkan</a></span>
                 </div>
             </form>
-        </div>        
+        </div>
         <script src="{{asset('js/jquery.min.js')}}"></script>
-        <script src="{{asset('js/matrix.login.js')}}"></script> 
+        <script src="{{asset('js/matrix.login.js')}}"></script>
         <script>
             function submit(field_id, submit_id) {
                 var input = document.getElementById(field_id);
