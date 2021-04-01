@@ -1,4 +1,4 @@
-# <img src="https://www.mfaza.my.id/img/bps.png" width="40px" height="auto"/> SISTEM 20JP PUSDIKLAT BPS
+# <img src="https://www.bps.go.id/website/fileMenu/logo.png" width="40px" height="auto"/> SISTEM 20JP PUSDIKLAT BPS
 
 ### 20JP
 
